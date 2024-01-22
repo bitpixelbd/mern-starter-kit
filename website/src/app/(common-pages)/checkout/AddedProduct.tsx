@@ -66,34 +66,7 @@ const AddedProduct = ({ items }) => {
                     </div>
                   </div>
                   <hr />
-                  {/* <div className="p-3">
-                    <div className="row">
-                      <div className="col-6">
-                        <p>Subtotal:</p>
-                      </div>
-                      <div className="col-6 text-end">
-                        <p className="price-text sub-total-text text-end">${price.toFixed(2)} </p>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-6">
-                        <p>Tax:</p>
-                      </div>
-                      <div className="col-6 text-end">
-                        <p className="price-text tax-price-text">$70.48</p>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-6">
-                        <p>Total:</p>
-                      </div>
-                      <div className="col-6 float-end">
-                        <p className="total-text raw-total-text mb-0" data-price="775.28">
-                          ${price + 70.48}
-                        </p>
-                      </div>
-                    </div>
-                  </div> */}
+                  
                 </div>
               );
             })

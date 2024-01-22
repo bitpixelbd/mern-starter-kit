@@ -16,11 +16,9 @@ const CheckOutPage = () => {
   const [isCompanyInvoice, setIsCompanyInvoice] = useState(false);
   const router = useRouter()
 
-  if (items?.length <= 0) {
-    return <p>Loading ............</p>;
-  }
 
 
+  // Post request function 
   const checkoutMuted = useMutation(async (data) => await post(API_CHECKOUT, data), {
     onSuccess: (res) => {
       const userInfo = encryptData(res.data);

@@ -1,9 +1,8 @@
 /* eslint-disable */
 
 import { EditOutlined } from '@ant-design/icons';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import {
-  Badge,
   Button,
   Card,
   Descriptions,
@@ -13,20 +12,17 @@ import {
   Spin,
   Tag,
   Typography,
-  message,
 } from 'antd';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AdvisorAssignButton from '~/components/AdvisorAssignButton';
-import { SERVER_URL } from '~/configs';
-import { get, patch, post } from '~/services/api/api';
+import { get } from '~/services/api/api';
 import { API_CRUD } from '~/services/api/endpoints';
 import DrawerForm from './_DrawerForm';
 const { Title } = Typography;
 
-const AdvisorDetails = () => {
-  const drawerTitle = 'Update Advisor';
-  const model = 'Advisor';
+const ProductDetail = () => {
+  const drawerTitle = 'Update Product';
+  const model = 'Product';
 
   const BASE_URL = '/students';
   const navigate = useNavigate();
@@ -45,9 +41,11 @@ const AdvisorDetails = () => {
     refetch,
     isSuccess,
   } = useQuery({
-    queryKey: [`advisor-details-${id}`],
-    queryFn: () => get(`${API_CRUD}/${id}?model=Advisor`),
+    queryKey: [`product-details-${id}`],
+    queryFn: () => get(`${API_CRUD}/${id}?model=Product`),
   });
+
+  // console.log(details);
 
   if (isLoading || !isSuccess || details === undefined) {
     return <Spin />;
@@ -97,8 +95,7 @@ const AdvisorDetails = () => {
         onSubmitSuccess={onSubmitSuccess}
       />
       <Space wrap style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Title level={2}>{details?.data?.first_name} </Title>
-        <AdvisorAssignButton advisor_id={details?.data?.id} />
+        <Title level={2}>{details?.data?.name} </Title>
       </Space>
       <Card bordered={true} style={{ width: '100%' }}>
         <Space wrap style={{ display: 'flex', justifyContent: 'end' }}>
@@ -111,37 +108,56 @@ const AdvisorDetails = () => {
           </Button>
         </Space>
         <Divider>
-          <Image width={200} src={details?.data?.profile_photo}></Image>
+          <Image width={200} src={details?.data?.featured_image}></Image>
         </Divider>
         <Descriptions>
-          <Descriptions.Item label="First Name">
-            {details?.data?.first_name}
+          <Descriptions.Item label="name">{details?.data?.name}</Descriptions.Item>
+
+          <Descriptions.Item label="Permalink">
+            {details?.data?.permalink}
           </Descriptions.Item>
-          <Descriptions.Item label="Last Name">
-            {details?.data?.last_name}
+          <Descriptions.Item label="Description">
+            {details?.data?.description}
           </Descriptions.Item>
-          <Descriptions.Item label="Email">{details?.data?.email}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{details?.data?.phone}</Descriptions.Item>
-          <Descriptions.Item label="Designation">
-            {details?.data?.designation}
+          <Descriptions.Item label="content">{details?.data?.content}</Descriptions.Item>
+          <Descriptions.Item label="SKU">{details?.data?.sku}</Descriptions.Item>
+          <Descriptions.Item label="Price">{details?.data?.price}</Descriptions.Item>
+          <Descriptions.Item label="Discount">
+            {details?.data?.discount_id}
           </Descriptions.Item>
-          <Descriptions.Item label="Experience">
-            {details?.data?.experience}
+          <Descriptions.Item label="Stock Status">
+            {details?.data?.stock_status}
           </Descriptions.Item>
-          <Descriptions.Item label="Operating in">
-            {details?.data?.operating_in}
+          <Descriptions.Item label="Stock Quantity">
+            {details?.data?.stock_quantity}
           </Descriptions.Item>
-          <Descriptions.Item label="Families helped">
-            {details?.data?.families_helped}
+          <Descriptions.Item label="Weight">{details?.data?.weight}</Descriptions.Item>
+          <Descriptions.Item label="Length">{details?.data?.length}</Descriptions.Item>
+          <Descriptions.Item label="Wide">{details?.data?.wide}</Descriptions.Item>
+          <Descriptions.Item label="Height">{details?.data?.height}</Descriptions.Item>
+          <Descriptions.Item label="Status">{details?.data?.status}</Descriptions.Item>
+          <Descriptions.Item label="Store Id">
+            {details?.data?.store_id}
           </Descriptions.Item>
-          <Descriptions.Item label="Address">{details?.data?.address}</Descriptions.Item>
-          <Descriptions.Item label="Assign city">
-            {details?.data?.assign_city}
+          <Descriptions.Item label="Is Featured">
+            {details?.data?.is_featured ? (
+              <Tag color="green">Yes</Tag>
+            ) : (
+              <Tag color="red">No</Tag>
+            )}
           </Descriptions.Item>
+          <Descriptions.Item label="Category">
+            {details?.data?.category_id}
+          </Descriptions.Item>
+          <Descriptions.Item label="Brand">{details?.data?.brand_id}</Descriptions.Item>
+          <Descriptions.Item label="Collection Tag">
+            {details?.data?.collection_tag}
+          </Descriptions.Item>
+          <Descriptions.Item label="Label">{details?.data?.label}</Descriptions.Item>
         </Descriptions>
       </Card>
     </>
   );
 };
 
-export default AdvisorDetails;
+export default ProductDetail;

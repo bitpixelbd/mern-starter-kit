@@ -87,9 +87,6 @@ model Address {
   country            String? @db.VarChar(200)
   is_billing_address Boolean @default(true)
   User               User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  ShippingOrder      Order[] @relation("shippingAddress")
-  Order              Order[]
-
   @@map(name: "addresses")
 }
 
@@ -122,159 +119,7 @@ model ResetPassword {
   @@map(name: "reset_password")
 }
 
-model FlashSale {
-  id         Int       @id @default(autoincrement())
-  name       String?   @db.VarChar(200)
-  start_date DateTime?
-  end_date   DateTime?
-  status     String?   @db.VarChar(200)
-  product_id Int?
 
-  @@map(name: "flash_sales")
-}
-
-model Order {
-  id                 Int              @id @default(autoincrement())
-  user_id            Int
-  discount_id        Int?
-  sub_amount         Int?
-  promotion_amount   Int?
-  tax_amount         Int?
-  shipping_amount    Int?
-  // payment_method_id  Int?
-  shipping_id        Int?
-  billing_id         Int?
-  note               String?
-  status             String?          @db.VarChar(200)
-  is_company_invoice Boolean          @default(false)
-  company_name       String?
-  company_email      String?
-  company_address    String?
-  company_tax        String?
-  OrderOnProduct     OrderOnProduct[]
-  ShippingAddress    Address?         @relation("shippingAddress", fields: [shipping_id], references: [id])
-  BillinggAddress    Address?         @relation(fields: [billing_id], references: [id])
-  // PaymentMethod      PaymentMethod?    @relation(fields: [payment_method_id], references: [id])
-
-  @@map(name: "orders")
-}
-
-model OrderOnProduct {
-  id               Int      @id @default(autoincrement())
-  order_id         Int?
-  product_id       Int?
-  product_quantity Int?
-  total_price      Int?
-  Order            Order?   @relation(fields: [order_id], references: [id])
-  Product          Product? @relation(fields: [product_id], references: [id])
-
-  @@map(name: "order_on_products")
-}
-
-model SEOMeta {
-  id          Int      @id @default(autoincrement())
-  product_id  Int?
-  title       String?  @db.VarChar(200)
-  description String?  @db.VarChar(200)
-  is_index    String?  @db.VarChar(200)
-  category_id Int?
-  tag_id      Int?
-  brand_id    Int?
-  page_id     Int?
-  Product     Product? @relation(fields: [product_id], references: [id])
-  Tag         Tag?     @relation(fields: [tag_id], references: [id])
-  Brand       Brand?   @relation(fields: [brand_id], references: [id])
-  Page        Page?    @relation(fields: [page_id], references: [id])
-
-  @@map(name: "s_e_o_metas")
-}
-
-model ProductFaq {
-  id         Int      @id @default(autoincrement())
-  product_id Int?
-  question   String?  @db.VarChar(200)
-  answer     String?  @db.VarChar(200)
-  Product    Product? @relation(fields: [product_id], references: [id])
-
-  @@map(name: "product_faqs")
-}
-
-model Discount {
-  id              Int           @id @default(autoincrement())
-  start_date      DateTime?
-  end_date        DateTime?
-  product_id      Int?
-  type            String?       @db.VarChar(200)
-  discount_type   DiscountTypes @default(FIXED)
-  discount_amount Int?
-  is_expired      Boolean       @default(true)
-  store_id        Int?
-  Product         Product?      @relation(fields: [product_id], references: [id])
-  Store           Store?        @relation(fields: [store_id], references: [id])
-
-  @@map(name: "discounts")
-}
-
-enum DiscountTypes {
-  PERCENTAGE
-  FIXED
-}
-
-model RelatedProduct {
-  id                 Int      @id @default(autoincrement())
-  product_id         Int?
-  related_product_id Int?
-  is_cross_selling   Boolean?
-  Product            Product? @relation("product", fields: [product_id], references: [id])
-  RelatedProduct     Product? @relation("relatedProduct", fields: [related_product_id], references: [id])
-
-  @@map(name: "related_products")
-}
-
-model ProductOption {
-  id              Int               @id @default(autoincrement())
-  name            String?           @db.VarChar(200)
-  input_type      String?           @db.VarChar(200)
-  is_required     Boolean?
-  label           String?           @db.VarChar(200)
-  price           Int?
-  price_type      String?           @db.VarChar(200)
-  is_global       Boolean?
-  ProductOnOption ProductOnOption[]
-
-  @@map(name: "product_options")
-}
-
-model ProductTag {
-  id         Int      @id @default(autoincrement())
-  product_id Int?
-  tag_id     Int?
-  Product    Product? @relation(fields: [product_id], references: [id])
-  Tag        Tag?     @relation(fields: [tag_id], references: [id])
-
-  @@map(name: "product_tags")
-}
-
-model ProductSetting {
-  id         Int      @id @default(autoincrement())
-  product_id Int?
-  key        String?  @db.VarChar(200)
-  value      String?  @db.VarChar(200)
-  type       String?  @db.VarChar(200)
-  Product    Product? @relation(fields: [product_id], references: [id])
-
-  @@map(name: "product_settings")
-}
-
-model ProductVariant {
-  id                   Int               @id @default(autoincrement())
-  product_id           Int?
-  product_attribute_id Int?
-  Product              Product?          @relation(fields: [product_id], references: [id])
-  ProductAttribute     ProductAttribute? @relation(fields: [product_attribute_id], references: [id])
-
-  @@map(name: "product_variants")
-}
 
 model Product {
   id             Int              @id @default(autoincrement())
@@ -301,113 +146,11 @@ model Product {
   featured_image String?
   collection_tag String?          @db.VarChar(200)
   label          String?          @db.VarChar(200)
-  OrderOnProduct OrderOnProduct[]
-  SEOMeta        SEOMeta[]
-  ProductFaq     ProductFaq[]
-  Discount       Discount[]
-
-  ProductTag       ProductTag[]
-  ProductSetting   ProductSetting[]
-  ProductVariant   ProductVariant[]
-  ProductOnOption  ProductOnOption[]
-  Reviews          Reviews[]
-  Product          RelatedProduct[]   @relation("product")
-  RelatedProduct   RelatedProduct[]   @relation("relatedProduct")
-  StoresOnProducts StoresOnProducts[]
 
   @@map(name: "products")
 }
 
-model ProductCategory {
-  id                      Int               @id @default(autoincrement())
-  name                    String            @db.VarChar(200)
-  permalink               String?           @db.VarChar(200)
-  description             String?
-  status                  String?           @db.VarChar(200)
-  image                   String?
-  font_icon               String?
-  icon_image              String?
-  is_featured             Boolean?
-  parent_id               Int?
-  ProductChildrenCategory ProductCategory?  @relation("productCategory", fields: [parent_id], references: [id])
-  ProductCategory         ProductCategory[] @relation("productCategory")
-  Brand                   Brand[]
 
-  @@map(name: "product_categories")
-}
-
-model ProductAttribute {
-  id             Int              @id @default(autoincrement())
-  name           String           @db.VarChar(200)
-  slug           String?          @db.VarChar(200)
-  short_order    Int?
-  created_at     DateTime?
-  status         String?          @db.VarChar(200)
-  ProductVariant ProductVariant[]
-
-  @@map(name: "product_attributes")
-}
-
-model ProductOnOption {
-  id                Int            @id @default(autoincrement())
-  product_id        Int
-  product_option_id Int
-  Product           Product?       @relation(fields: [product_id], references: [id])
-  ProductOption     ProductOption? @relation(fields: [product_option_id], references: [id])
-
-  @@map(name: "product_on_options")
-}
-
-model Brand {
-  id              Int              @id @default(autoincrement())
-  name            String           @db.VarChar(200)
-  permalink       String?          @db.VarChar(200)
-  description     String?
-  website         String?          @db.VarChar(200)
-  logo            String?
-  status          String?          @db.VarChar(200)
-  order           String?          @db.VarChar(200)
-  is_featured     Boolean?
-  category_id     Int?
-  ProductCategory ProductCategory? @relation(fields: [category_id], references: [id])
-  SEOMeta         SEOMeta[]
-
-  @@map(name: "brands")
-}
-
-model ProductCollection {
-  id          Int      @id @default(autoincrement())
-  name        String
-  slug        String?  @db.VarChar(200)
-  description String?
-  image       String?
-  status      String?  @db.VarChar(200)
-  is_featured Boolean?
-
-  @@map(name: "product_collections")
-}
-
-model ProductLabel {
-  id     Int     @id @default(autoincrement())
-  name   String  @db.VarChar(200)
-  color  String? @db.VarChar(200)
-  status String? @db.VarChar(200)
-
-  @@map(name: "product_labels")
-}
-
-model Reviews {
-  id         Int       @id @default(autoincrement())
-  rating     Int
-  created_at DateTime?
-  comment    String?
-  user_id    Int
-  product_id Int
-  User       User?     @relation(fields: [user_id], references: [id])
-  Product    Product?  @relation(fields: [product_id], references: [id])
-
-  @@map(name: "reviews")
-}
 
 model User {
   id              Int               @id @default(autoincrement())
@@ -423,48 +166,9 @@ model User {
   is_verified     Boolean           @default(false)
   address         String?
   description     String?
-  Reviews         Reviews[]
-  Store           Store[]
   Address         Address[]
-  VendorOnProduct VendorOnProduct[]
-  Withdrawal      Withdrawal[]
 
   @@map(name: "users")
-}
-
-model Store {
-  id               Int                @id @default(autoincrement())
-  name             String
-  url              String?
-  email            String?            @db.VarChar(200)
-  phone            String?            @db.VarChar(200)
-  description      String?
-  content          String?
-  country          String?            @db.VarChar(200)
-  state            String?            @db.VarChar(200)
-  city             String?            @db.VarChar(200)
-  address          String?
-  company          String?            @db.VarChar(200)
-  logo             String?
-  cover_image      String?
-  status           String?            @db.VarChar(200)
-  user_id          Int
-  User             User               @relation(fields: [user_id], references: [id])
-  Discount         Discount[]
-  StoresOnProducts StoresOnProducts[]
-
-  @@map(name: "stores")
-}
-
-model StoresOnProducts {
-  id         Int      @id @default(autoincrement())
-  store_id   Int
-  product_id Int
-  created_at DateTime @default(now())
-  store      Store    @relation(fields: [store_id], references: [id])
-  product    Product  @relation(fields: [product_id], references: [id])
-
-  @@map("stores_on_products")
 }
 
 model Page {
@@ -476,7 +180,6 @@ model Page {
   status      String?   @db.VarChar(200)
   templete    String?   @db.VarChar(200)
   image       String?   @db.VarChar(200)
-  SEOMeta     SEOMeta[]
   Faq         Faq[]
 
   @@map(name: "pages")
@@ -492,122 +195,16 @@ model Faq {
   @@map(name: "faqs")
 }
 
-model Post {
-  id          Int     @id @default(autoincrement())
-  name        String
-  permalink   String? @db.VarChar(200)
-  description String? @db.VarChar(200)
-  content     String? @db.VarChar(200)
-  status      String? @db.VarChar(200)
-  category_id Int?
-  tag_id      Int?
-  image       String? @db.VarChar(200)
-  Tag         Tag?    @relation(fields: [tag_id], references: [id])
+model Blog {
+  id              Int       @id @default(autoincrement())
+  title           String
+  author_name     String?
+  category        String?   @db.VarChar(200)
+  short_desc      String?   @db.VarChar(200)
+  description     String?   @db.VarChar(200)
+  content         String?   @db.VarChar(200)
+  author_image    String?   @db.VarChar(200)
+  blog_image      String?   @db.VarChar(200)
 
-  @@map(name: "posts")
-}
-
-model Category {
-  id          Int      @id @default(autoincrement())
-  name        String
-  permalink   String?  @db.VarChar(200)
-  description String?  @db.VarChar(200)
-  is_default  Boolean?
-  is_featured Boolean?
-  icon        String?
-  status      String?  @db.VarChar(200)
-
-  @@map(name: "categories")
-}
-
-model Tag {
-  id          Int          @id @default(autoincrement())
-  name        String
-  permalink   String?      @db.VarChar(200)
-  description String?      @db.VarChar(200)
-  status      String?      @db.VarChar(200)
-  SEOMeta     SEOMeta[]
-  ProductTag  ProductTag[]
-  Post        Post[]
-
-  @@map(name: "tags")
-}
-
-model Advertisement {
-  id                Int       @id @default(autoincrement())
-  name              String
-  key               String?   @db.VarChar(200)
-  url               String?   @db.VarChar(200)
-  order_quantity    Int?
-  open_new_tab      Boolean?
-  status            String?   @db.VarChar(200)
-  viewport_location String?   @db.VarChar(200)
-  expiration_date   DateTime?
-  desktop_image     String?   @db.VarChar(200)
-  tablet_image      String?   @db.VarChar(200)
-  mobile_image      String?   @db.VarChar(200)
-
-  @@map(name: "advertisements")
-}
-
-model Slider {
-  id          Int     @id @default(autoincrement())
-  name        String? @db.VarChar(200)
-  key         String? @db.VarChar(200)
-  description String?
-  status      String? @db.VarChar(200)
-
-  @@map(name: "sliders")
-}
-
-model Country {
-  id               Int      @id @default(autoincrement())
-  name             String?  @db.VarChar(200)
-  country_iso_code String?  @db.VarChar(200)
-  nationality      String?  @db.VarChar(200)
-  sort_order       Int?
-  is_default       Boolean?
-  status           String?  @db.VarChar(200)
-
-  @@map(name: "countries")
-}
-
-model PaymentMethod {
-  id   Int    @id @default(autoincrement())
-  name String
-  // Order Order[]
-
-  @@map(name: "payment_methods")
-}
-
-model VendorOnProduct {
-  id        Int  @id @default(autoincrement())
-  vendor_id Int
-  Vendor    User @relation(fields: [userId], references: [id])
-  userId    Int
-}
-
-model Withdrawal {
-  id                  Int     @id @default(autoincrement())
-  amount              Float
-  description         String?
-  bank_name           String? @db.VarChar(200)
-  account_holder_name String?
-  account_number      String?
-  discount_amount     Int?
-  vendor_id           Int
-  Vendor              User    @relation(fields: [vendor_id], references: [id])
-
-  @@map(name: "withdrawals")
-}
-
-model Car {
-  id Int @id @default(autoincrement())
-  name String
-  model String?
-  wheel Int?
-  price Float?
-  is_verified Boolean
-
-  @@map(name:"cars")
+  @@map(name: "blogs")
 }

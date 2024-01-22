@@ -1,4 +1,3 @@
-import Footer from "@/src/components/header-footer/footer/Footer";
 import Header from "@/src/components/header-footer/header/Header";
 
 export const metadata = {
@@ -13,7 +12,6 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <Header />
       <main>{children}</main>
-      <Footer />
     </div>
   );
 };

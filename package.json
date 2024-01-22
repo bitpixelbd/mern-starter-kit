@@ -19,7 +19,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "concurrently \"cd api && npm run start:dev\" \"cd admin && npm run dev\" \"cd vendor && npm run dev\" \"cd website && npm run dev\"",
+    "start": "concurrently \"cd api && npm run start:dev\" \"cd admin && npm run dev\" \"cd website && npm run dev\"",
     "setup": "bash ./setup.sh",
     "install": "bash ./install.sh"
   },
