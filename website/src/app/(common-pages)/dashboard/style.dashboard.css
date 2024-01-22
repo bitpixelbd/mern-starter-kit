@@ -1,0 +1,59 @@
+.dashboard-div {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+.dashboard-children {
+  width: 100%;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.order-table {
+  margin-top: 57px;
+}
+
+.reviews-button {
+  border: none;
+  background-color: #f8f8f8;
+  color: #fcb800;
+  padding: 10px;
+}
+
+.reviews-active-button {
+  border: none;
+  color: #ffffff;
+  background-color: #fcb800;
+  padding: 10px;
+}
+
+.waiting-reviews-products {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.product-reviews-page {
+  background-color: #fff;
+  /* border: 1px solid black; */
+  padding: 30px;
+  box-shadow: 1px 1px 15px -1rem rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.dashboard-logout-button {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  text-align: left;
+  background-color: #ffffff;
+}
+
+.dashboard-logout-button:hover {
+  background-color: #fcb800;
+  color: #ffffff  ;
+}

@@ -1,0 +1,1 @@
+export const EXAMPLE_CSV_CONTENT = 'name,email,phone,logo,short_desc,desc,street,post_code,city,state,lat,lon,address,price_start,price_end,website,facebook,instagram,linkedin,slug\n'

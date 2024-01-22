@@ -1,0 +1,1938 @@
+{
+	"info": {
+		"_postman_id": "a33a874a-6318-4ea1-a31a-1b2ce188473d",
+		"name": "Node commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26171795"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"idToken\": \"123\"\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "config",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/api/v1/config",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"config"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "home",
+			"item": [
+				{
+					"name": "home",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/api/v1/home",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{TOKEN}}"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/v1/home",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"home"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2545"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f1-XkPXsAqdm7iFvsdrh52JTM/1Y/g\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Sep 2023 13:37:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"levels\": [\n            {\n                \"id\": 1,\n                \"name\": \"GCSE\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"A-Level\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"AS-Level\"\n            }\n        ],\n        \"subjects\": [\n            {\n                \"id\": 1,\n                \"name\": \"Chemistry\",\n                \"is_popular\": true\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Physics\",\n                \"is_popular\": true\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Biology\",\n                \"is_popular\": false\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Mathematics\",\n                \"is_popular\": false\n            },\n            {\n                \"id\": 5,\n                \"name\": \"History\",\n                \"is_popular\": false\n            },\n            {\n                \"id\": 6,\n                \"name\": \"English Literature\",\n                \"is_popular\": false\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Computer Science\",\n                \"is_popular\": true\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Art History\",\n                \"is_popular\": true\n            },\n            {\n                \"id\": 9,\n                \"name\": \"Psychology\",\n                \"is_popular\": true\n            },\n            {\n                \"id\": 10,\n                \"name\": \"Sociology\",\n                \"is_popular\": true\n            }\n        ],\n        \"testimonials\": [\n            {\n                \"id\": 1,\n                \"desc\": \"From covering new content to prepping for exams, my teacher was great at providing a variety of resources to fill the gaps in our knowledge. Above all, he is a committed teacher who strives to instil his students with enthusiasm and ambition, qualities which remain important beyond your time in education.\",\n                \"student_name\": \"Suraiya\",\n                \"subject\": \"Geography\",\n                \"school\": \"University College London\",\n                \"image\": \"\",\n                \"is_student\": true,\n                \"sort_order\": 1\n            },\n            {\n                \"id\": 2,\n                \"desc\": \"As a student passionate about literature, my teacher not only helped me understand complex literary concepts but also inspired me to explore the world of books further. Their dedication to teaching is truly commendable.\",\n                \"student_name\": \"Liam\",\n                \"subject\": \"Literature\",\n                \"school\": \"Oxford University\",\n                \"image\": \"liam.jpg\",\n                \"is_student\": true,\n                \"sort_order\": 2\n            }\n        ],\n        \"faqs\": [\n            {\n                \"id\": 1,\n                \"question\": \"What is exam success and how does ESPD promote it?\",\n                \"answer\": \"We guarantee exam success through guaranteeing students access to quality first tutors who are fully qualified teachers from universities and teaching practices in the UK and have at least three years’ experience teaching and raising achievement in their subject(s) as well as current and clear DBS checks. We ensure that every tutorial involves our tutors understanding exactly what students require support with, sensitively and effectively closing the gap in curriculum knowledge and exam skill and then ensuring that the student is empowered to answer an exam question by the end of each tutorial.\",\n                \"sort_order\": 1\n            },\n            {\n                \"id\": 2,\n                \"question\": \"How does ESPD select its tutors?\",\n                \"answer\": \"ESPD selects tutors who are fully qualified teachers from universities and teaching practices in the UK. Our tutors have at least three years' experience teaching and improving student achievement in their subject areas. Additionally, they undergo current and clear DBS checks to ensure the safety and security of our students.\",\n                \"sort_order\": 2\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/home/settings",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home",
+								"settings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/home/settings",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"home",
+										"settings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "438"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b6-amWO8dJ2s+ofWmsFss5VXBGC6nk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 08:33:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"email\": \"tuition@provider.com\"\n    },\n    {\n        \"phone\": \"34523523\"\n    },\n    {\n        \"desc\": \"We are an online tuition service that empowers GCSE and A Level students to achieve grades 6-9 at GCSE and B-A* grades at A Level so that they can progress to the colleges, universities, apprenticeships and careers of their dreams.\"\n    },\n    {\n        \"instagram\": \"https://instagram.com\"\n    },\n    {\n        \"facebook\": \"https://facebook.com\"\n    },\n    {\n        \"youtube\": \"https://youtube.com\"\n    },\n    {\n        \"tiktok\": \"https://tiktok.com\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "testimonials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/home/testimonials",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home",
+								"testimonials"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/home/testimonials",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"home",
+										"testimonials"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "818"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"332-jC3GcZOYKACZqHyAYhtlV4IUXRA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 09:05:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 3,\n        \"desc\": \"From covering new content to prepping for exams, my teacher was great at providing a variety of resources to fill the gaps in our knowledge. Above all, he is a committed teacher who strives to instil his students with enthusiasm and ambition, qualities which remain important beyond your time in education.\",\n        \"student_name\": \"Suraiya\",\n        \"subject\": \"Geography\",\n        \"school\": \"University College London\",\n        \"image\": \"\",\n        \"is_student\": true,\n        \"sort_order\": 1\n    },\n    {\n        \"id\": 4,\n        \"desc\": \"As a student passionate about literature, my teacher not only helped me understand complex literary concepts but also inspired me to explore the world of books further. Their dedication to teaching is truly commendable.\",\n        \"student_name\": \"Liam\",\n        \"subject\": \"Literature\",\n        \"school\": \"Oxford University\",\n        \"image\": \"liam.jpg\",\n        \"is_student\": true,\n        \"sort_order\": 2\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "features",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/home/features",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home",
+								"features"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/home/features",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"home",
+										"features"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5197"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"144d-osB7c2iwlpB7UTYcfMfkDvQFq74\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 09:07:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 4,\n        \"title\": \"Qualified Teachers\",\n        \"description\": \"At ESPD, we take pride in providing the highest standard of education, and it all starts with our exceptional team of qualified teachers. Each of our teachers holds official accreditation from renowned universities and teaching practice centers within the UK.\",\n        \"image\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANuSURBVHgB7Zs9TFNRFMf/5xUwQCBgqMFgtGB00EEnZjprAhOsOsvgxoisTJrorCtMkugMq0xdcNDIVyASS8RAgEBpr+fcR2mpgLzHva9N7/sNfR9N83o+7jnnnvsuoQK1nx1AAoNQ3hBfpVAPEGVYlgzyuQlqvrl86qviiVJLHci1j/PJS9QzRK/R6E0Qdf7Rl/JxLPwsnzyGC4hHNHppUYKnb/iWd0N4QWTNFcbllNT+zxS8xiW4SEGlPRZ+HK5CNMRDgNxx/UqIBkkdbCo4jAfHiRUAx4kVAMeJFQDHcV4BDTDJ9gLU6ntgdxlWuHYDdPsZcL0fpjDnAQdZqO+T9oTXz/gFtfgOONqDKYwpQO3xhPJoF9bJ70JtfYEpzHmAQatESfDJkLj64ls93muKzn7QneccJ5KBfhbYA3SQqzXhha153zABCZ4Ffs/7R9F028PS/cNsdIpp5+c2lVl6Z0F7Zpjnh0+DLDzdHT25VNm56BTQNQBKpkvP/sGWP5hDGOJKEPVAPnz6Da4ArsY0O19RM+yt+MeAGUAIroC2B/6Rq7JayAYqO+v/F6E8KF+SwAo4FXy+Tfp/IGKoodU/EQOsfijdvzWCoITrCq9NQ61Pl65lWIj7RZkGJe0VLQ8RfhjoGUZQwrfFK5VQRcIKr397pXUBKYvXp3zLi0WiRLyO45Eeku3Bx34RowsjaoXL5I3PsEr3E7/mN4TROoC60rANdT+FScwWQq0pIDkAa3AJHCbXX4TxSlC7Z0MLjMOCh0lz/8N8KZxoBd0bg2no/phx6wt25gIclalvFKagvhdASwo2sLs8Lk0KyQxhU6S4vVjekvCC/fcDirWC9AsCQJzu0DNiJ56UPyeyFyQuUzRJ318ivRQ3Fsb7WVTnDRHuIKuNT0CxlJbiJgJrn0V1GiIiaLGvIMgYr4LwQtwSg+OYXRw9j2IArLh3wuYc1M7pXoKOCREEwkgUoNamtJDnckYjRXFoLm+72yKSIUBB5+scEKnT3BL4RcQvSsJxYgXAcWIFwHFiBcBxYgVA0TKchTLsAWoGrkIqQ3qrrEfRr3HXAoVcr0fNSZ6L4g1cg2WWfcTHW2e3OnBYYC9waevsdpqo1986qzcSN3lpJzxBZDwWXi7pn+9lKy0Sr+AlHtWPR3CmU/kZzngf9ZAv4y/JRjfukSTzxwAAAABJRU5ErkJggg==\",\n        \"type\": null,\n        \"is_active\": false,\n        \"sort_order\": 1,\n        \"has_image\": false,\n        \"has_button\": false,\n        \"button_text\": null,\n        \"button_url\": null,\n        \"button_class\": null\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Experienced Teachers\",\n        \"description\": \"Experience matters, and at ESPD, we understand the significance of having seasoned educators. That's why we handpick teachers who have a minimum of three years of teaching experience.\",\n        \"image\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANQSURBVHgB7Zs/TFNRFMa/8woSIBIwVCQQLWxGE110prMmMOHsaHRw0LmwO2iiszO4SAIzzExNFNmgJiJgjZgaIFja4z339bW1raWN976Q3vcb2vPevU1zvnvuv/PeJdTAx9kpxDAN9mbUVQKdAFFa+ZJGIT9PvaOZv4oCg3l7EPmBlDKeopMheolub55o6Ke+lI+S86vKuA0XkIjo9pIigqdv+C3vhvOC+JovpsQkPt5NwOvehosUOekp51NwFaIZ1QXIndCvhWia+OQ7w2E8OE4kABwnEgCOEwkAx3FegC7Y5mgbvDkHnB6iLXougyYfAwM3YBPrEcC5T+07L5x8Ax9lYBvrEUDxKXAgwM6i/y2terGmZX9tALkN3x6bBXX1A8NJ2MZ+F4j1g8ZntcmBAMr54F4Af1ksC1BbZpNoFoDjRALAcSIB4DiRADiPnB4hLEITQC90SlBPvK68+h7vLyMswhHgJFtZBouj8QZLXLnXn/Dt3RX/NyEQigC8s1C2afLJP+vR1Ye+UTgEf36LMLAvgKzvs2u+PTzVfHsrZUH5wXplc2QR+9vhrTdlm8YfnFlfR0hXn//bEKLAqgCcXdX7ekHv8BoMfnVInZH7vq3yAby3ApvYE0APfO98W5waa32LS6P3KmLJ7GFxWrQmgB74Sq0v72HwZsoP6R/rZzskOYRrVQPi1wXYws7DUdX6nH7UvI7KFJFkfJoMiiJaOUlyfd5KftCKAPzxGXCYaa2ycopGVMhfultfJgnVD88r9UQEwxhPiemBr1XnBdXCLK2sssAYugMaUkL0TfgzgXxfUeLIQCh1pPs0Euo/MBsBqm/r1i/3fcNIqvzmi/I0aQKjgyDvLdtzXpBUueF9gjkBqtf7NjG8TzAmQPV63yoyLW69himMCKAHvmC9Hwa5DWP7BDMRsG93udoINtTdzAjQzrRninMVAZaf4Nr8TyMC6C1sXwKhIc8WmyRW2iF6URKOEwkAx4kEgONEAsBxIgHAlIGzUFpFAC/BVYjTpI/KerQKFynmJzzqja+B8QquoXyWc8Slo7MHg/hdVFHg0tHZXJJowj86qw8SX/CSTkSC+FhyXi6prlyO0iI2By92q3MiQs10XFhSM9573eWr+ANBri35nBzqxwAAAABJRU5ErkJggg==\",\n        \"type\": null,\n        \"is_active\": false,\n        \"sort_order\": 1,\n        \"has_image\": false,\n        \"has_button\": false,\n        \"button_text\": null,\n        \"button_url\": null,\n        \"button_class\": null\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Background Checked\",\n        \"description\": \"The safety and well-being of our students are paramount. To ensure that our learning environment remains secure, all our teachers undergo rigorous DBS (Disclosure and Barring Service) criminal record checks.\",\n        \"image\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANPSURBVHgB7ZvPTxNBFMe/b8uPgAkBA8RfieDBhHiQi5zp2QOc5KxXL570JuKRkx6MNz3LSf4CeoZLL8ZEE6lGYmIJNSRASm3HedNutdhua+ftgJ39HMhuZ8v2+90382ZeO4QTqKP8PFJYgAoW9dkUegGirNaSRbm0QkMXcw1N4YFS26MojSzrgwfoZYieoT9YIRr7YU75T038hj6YhQ9wRPQHaTYhMC9Un7wf4hnWWqos8yGpo29TCPq34SMVlQ60+GX4CtGi7gLkT+ifhGiBVHFXwWMCeE5iADwnMQCekxgAz/HegD6cBj8Pob68Agpb1fOxW6DLS8DgBFzjfiZYzEO918uP4vfG1wcnQTMrzk1w2wUOc83FM/q1alseLokvAvbfVZ92KLZ8AOxmdPgftH/vxDwwMGkOSUeGiYqRG4gDeQNahbgtMXUR8S4Qi3gm7CLCyBpgwj4G8SH8v/kegogaoBwMYErYYNkIiPPp1+8ha3IyFYYkxw4ioNxBGv0H5Azg0MxnYE3fMOjqXeD8XPN2voeeUEkhY0CY+21h8TNPgQu3QZfuNL9GR4D6sCo2FtgbIDXxCcUPT5lTVdhsfW04J9CLKlusDVA7b+TFf10Ddtai38Mm8IrSEvsIiHpSndCN+JC9LdjiJA3yoEazL/UiJ93YYCNeCHsDxubaX8MC9SKGrt3/bYKEeF1IscXaAJOy2qzQ1KcX9VHbmMCjvK14NvTKEmyRWQ6bTPA4OjW1WM52LZ4NFFgay4wB/IGuPzRh3ZImFZ9u+7yUeEZuEByeBsbT0deEJuxtQn1+3d2ANz4vWhSRrQqnzrW/hk34uIquGZyEJMlqEJIIP53m9zjDNUFyUNOnM90FuHQdpwkxlMfFxwDJFNVAmPuFcffFCFeLOimY8FyC02kto/x/X4xE0W7GaCZUj+pTZBe4TYNRU9iwzaF45nR+J8iRwIWUsJYwOqcXVfeip9IxkfxQEp6TGADPSQyA5yQGwHMSA6AoB2+hrI4AtQ5fIZUls1U2oA34SKU0HdDQRAYKz+EbWjPvI65tnS2M4riio8CnrbP7aaLp6tZZs5F4IEh7EQmssSaeT+mvdt5Ki9QTBKmbvRMROtOp8rrOeG9Nl/+DXxP0YQHKbs1YAAAAAElFTkSuQmCC\",\n        \"type\": null,\n        \"is_active\": false,\n        \"sort_order\": 1,\n        \"has_image\": false,\n        \"has_button\": false,\n        \"button_text\": null,\n        \"button_url\": null,\n        \"button_class\": null\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/home/cities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get static page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/static/page/Vel-officia-et-quis-",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"static",
+								"page",
+								"Vel-officia-et-quis-"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all amenities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/amenities/all",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"amenities",
+								"all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all amenities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/amenities/all",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"amenities",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "802"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"322-eMxujMw5VkMHKvNRJZNAHNRmMgg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Nov 2023 11:59:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"group_name\": \"Senior Care Amenities\",\n            \"amenities\": [\n                {\n                    \"name\": \"Cable / Satelite TV\",\n                    \"icon\": null,\n                    \"id\": 16\n                },\n                {\n                    \"name\": \"test amenity\",\n                    \"icon\": \"http://localhost:8000/uploads/68dacf5e-1721-499d-b130-c4b01e355396.png\",\n                    \"id\": 42\n                }\n            ]\n        },\n        {\n            \"group_name\": \"Meals and Dining\",\n            \"amenities\": [\n                {\n                    \"name\": \"Ambulation Assistance\",\n                    \"icon\": null,\n                    \"id\": 10\n                }\n            ]\n        },\n        {\n            \"group_name\": \"Room Amenities\",\n            \"amenities\": [\n                {\n                    \"name\": \"Free Transportation\",\n                    \"icon\": null,\n                    \"id\": 35\n                },\n                {\n                    \"name\": \"Mehedi\",\n                    \"icon\": null,\n                    \"id\": 41\n                }\n            ]\n        },\n        {\n            \"group_name\": \"Community Amenities\",\n            \"amenities\": [\n                {\n                    \"name\": \"Low / No Sodium\",\n                    \"icon\": null,\n                    \"id\": 22\n                },\n                {\n                    \"name\": \"Barber / Salon\",\n                    \"icon\": null,\n                    \"id\": 37\n                }\n            ]\n        },\n        {\n            \"group_name\": \"Other Amenities\",\n            \"amenities\": [\n                {\n                    \"name\": \"Medication Management\",\n                    \"icon\": null,\n                    \"id\": 1\n                },\n                {\n                    \"name\": \"Meals Provided\",\n                    \"icon\": null,\n                    \"id\": 3\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reset password",
+			"item": [
+				{
+					"name": "reuqest otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"vilofos233@ibtrades.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/reset-password/request-otp",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reset-password",
+								"request-otp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"password\": \"123456\",\r\n    \"is_vendor\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/user/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "BearerToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/profile",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwiaWQiOjIsInN1YiI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTkyNDYzNTV9.46pZljTvqUWaekVYVfhWqIXOlFhsGWxpbQWBsnJDpaQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "BearerToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwiaWQiOjIsInN1YiI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTkyNDYzNTV9.46pZljTvqUWaekVYVfhWqIXOlFhsGWxpbQWBsnJDpaQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_password\":\"123456\",\r\n    \"current_password\":\"mehedi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/update/password",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"update",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Favourite Teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"student_id\": 10,\r\n    \"teacher_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/favourite",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"favourite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favourite Teachers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/favourite/10",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"favourite",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Favourite Teachers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/favourite/10",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"favourite",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1113"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"459-/BXWzJK8FATcJucz1SVA9A2HPsQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Sep 2023 13:00:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"first_name\": \"Mireille\",\n            \"last_name\": \"O'Hara\",\n            \"exam_board_logo\": [],\n            \"bio\": \"Regional\",\n            \"hourly_rate\": 810,\n            \"review\": [],\n            \"description\": null,\n            \"is_super_tutor\": true\n        },\n        {\n            \"first_name\": \"Kiley\",\n            \"last_name\": \"Harris\",\n            \"exam_board_logo\": [],\n            \"bio\": \"International\",\n            \"hourly_rate\": 276,\n            \"review\": [],\n            \"description\": null,\n            \"is_super_tutor\": true\n        },\n        {\n            \"first_name\": \"Dolores\",\n            \"last_name\": \"Hyatt\",\n            \"exam_board_logo\": [],\n            \"bio\": \"Internal\",\n            \"hourly_rate\": 647,\n            \"review\": [\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                }\n            ],\n            \"description\": null,\n            \"is_super_tutor\": true\n        },\n        {\n            \"first_name\": \"Joel\",\n            \"last_name\": \"White\",\n            \"exam_board_logo\": [],\n            \"bio\": \"Human\",\n            \"hourly_rate\": 50,\n            \"review\": [],\n            \"description\": null,\n            \"is_super_tutor\": true\n        },\n        {\n            \"first_name\": \"Audra\",\n            \"last_name\": \"Ankunding\",\n            \"exam_board_logo\": [],\n            \"bio\": \"Human\",\n            \"hourly_rate\": 111,\n            \"review\": [\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                },\n                {\n                    \"rating\": 3\n                }\n            ],\n            \"description\": null,\n            \"is_super_tutor\": true\n        },\n        {\n            \"first_name\": \"Jean\",\n            \"last_name\": \"Shields\",\n            \"exam_board_logo\": [\n                \"sdfsdf\",\n                \"dfjhdf\"\n            ],\n            \"bio\": \"Senior\",\n            \"hourly_rate\": 257,\n            \"review\": [],\n            \"description\": null,\n            \"is_super_tutor\": true\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Contact with Teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacher_id\": 29,\r\n    \"message\": \"message for teacher\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/student/contact/teacher",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"contact",
+								"teacher"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Contact with Teacher",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"teacher_id\": 29,\r\n    \"student_id\": 5,\r\n    \"message\": \"message for teacher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/student/contact/teacher",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"student",
+										"contact",
+										"teacher"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"167-yZnS6fpgmgftGhPhLl9qMRxi3k0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Sep 2023 07:51:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": 10,\n        \"teacher_id\": 29,\n        \"student_id\": 5,\n        \"date\": \"2023-09-25T07:51:41.189Z\",\n        \"message\": \"message for teacher\",\n        \"subject_id\": null,\n        \"level_id\": null,\n        \"Teacher\": {\n            \"email\": \"Esteban.Mayer@hotmail.com\"\n        },\n        \"Student\": {\n            \"email\": \"Orpha_Sauer@gmail.com\"\n        },\n        \"Subject\": null,\n        \"Level\": null,\n        \"is_created\": true,\n        \"send_message\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "social media validation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/social/validation?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoyMSwicGhvbmUiOm51bGwsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNjk2MjMxNTcxfQ.hWTLQlU2QCgPrUIqh4ti_Auq8l6VgGswzHOhVHCK6g8",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"social",
+								"validation"
+							],
+							"query": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoyMSwicGhvbmUiOm51bGwsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNjk2MjMxNTcxfQ.hWTLQlU2QCgPrUIqh4ti_Auq8l6VgGswzHOhVHCK6g8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email_or_phone\":\"Dangelo_Roberts35@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logged",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email_or_phone\":\"500-724-9171\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/auth/user/login",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "557"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22d-4i6jkeXPZG3d9755iKnUtPupr98\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 Oct 2023 08:00:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 5,\n        \"first_name\": \"Ryleigh\",\n        \"last_name\": \"Goldner\",\n        \"email\": \"mdmehedihasan2360@gmail.com\",\n        \"phone\": \"500-724-9171\",\n        \"address\": null,\n        \"city\": null,\n        \"postal_code\": \"nocode\",\n        \"state\": null,\n        \"country\": null,\n        \"short_desc\": null,\n        \"description\": null,\n        \"profile_photo\": null,\n        \"is_verified\": true,\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjo1LCJzdWIiOjUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NjUyODE3fQ.qG-fJ-_Eqe9z5zRfUzJe-tp38z1kzDgc2gLhZDIFnTU\",\n        \"role\": \"user\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mdmehedihasan2360@gmail.com\",\r\n    \"otp\":145037\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/user/otp/verify",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"otp",
+								"verify"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "verified",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"mdmehedihasan2360@gmail.com\",\r\n    \"otp\":617015\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/auth/user/otp/verify",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"user",
+										"otp",
+										"verify"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "553"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"229-zPvfIOmg81wl30Q7ZKZfjpA00I4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 Oct 2023 07:04:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 4,\n        \"first_name\": \"Oran\",\n        \"last_name\": \"Legros\",\n        \"email\": \"mdmehedihasan2360@gmail.com\",\n        \"phone\": \"263-237-3251\",\n        \"address\": null,\n        \"city\": null,\n        \"postal_code\": \"nocode\",\n        \"state\": null,\n        \"country\": null,\n        \"short_desc\": null,\n        \"description\": null,\n        \"profile_photo\": null,\n        \"is_verified\": true,\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjo0LCJzdWIiOjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NjQ5NDg2fQ.52x-njf0sGfZTM74NawgPQrmpybnBSK78idVqll2xzo\",\n        \"role\": \"user\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjo1LCJzdWIiOjUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NjUyODE3fQ.qG-fJ-_Eqe9z5zRfUzJe-tp38z1kzDgc2gLhZDIFnTU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "BearerToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjo1LCJzdWIiOjUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NjUyODE3fQ.qG-fJ-_Eqe9z5zRfUzJe-tp38z1kzDgc2gLhZDIFnTU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Mehedi Hasan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/update/profile",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"update",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Submit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacher_id\": 7,\r\n    \"student_id\": 2,\r\n    \"rating\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/teacher/review/submit",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teacher",
+								"review",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By teacher Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/teacher/review/7",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teacher",
+								"review",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "all blogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/blog/all",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/blog/5",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard-User",
+			"item": [
+				{
+					"name": "recommended communities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "BearerToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/recommended/communities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"recommended",
+								"communities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "recommended communities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "BearerToken",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/dashboard/recommended/communities",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"dashboard",
+										"recommended",
+										"communities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "17169"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4311-FZGABMmiQIjqCAJhjUAJXi1pRt4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 11:13:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"user_id\": 1,\n        \"first_name\": \"Florine\",\n        \"last_name\": \"Conn\",\n        \"email\": \"mdmehedihasan2360@gmail.com\",\n        \"advisor\": {\n            \"id\": 1,\n            \"first_name\": \"sfasdfsa\",\n            \"last_name\": \"sadfasfas\",\n            \"email\": \"safsadfdsafas\",\n            \"phone\": \"fsadfsa\",\n            \"address\": null,\n            \"designation\": null,\n            \"profile_photo\": null,\n            \"families_helped\": null,\n            \"experience\": 3,\n            \"operating_in\": null\n        },\n        \"recommended_communities\": [\n            {\n                \"id\": 1,\n                \"name\": \"Hermann\",\n                \"address\": \"Baer\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2162.637791\",\n                \"slug\": \"slug-name\",\n                \"services\": [\n                    {\n                        \"name\": \"test\",\n                        \"icon\": \"type\"\n                    },\n                    {\n                        \"name\": \"de\",\n                        \"icon\": \"type\"\n                    },\n                    {\n                        \"name\": \"asss\",\n                        \"icon\": \"type\"\n                    }\n                ],\n                \"total_reviews\": 2,\n                \"total_reviews_ratings\": [\n                    2,\n                    2\n                ],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            },\n            {\n                \"id\": 2,\n                \"name\": \"John\",\n                \"address\": \"Seo\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2167.567923\",\n                \"slug\": \"slug-name\",\n                \"services\": [],\n                \"total_reviews\": 0,\n                \"total_reviews_ratings\": [],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Joshua\",\n                \"address\": \"Patel\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2172.498055\",\n                \"slug\": \"slug-name\",\n                \"services\": [],\n                \"total_reviews\": 0,\n                \"total_reviews_ratings\": [],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Donald\",\n                \"address\": \"OConnell\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2177.428187\",\n                \"slug\": \"slug-name\",\n                \"services\": [],\n                \"total_reviews\": 0,\n                \"total_reviews_ratings\": [],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "saved communities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/saved/communities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"saved",
+								"communities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "saved communities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/dashboard/saved/communities",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"dashboard",
+										"saved",
+										"communities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8822"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2276-fdSILnUfPyP7qpWVMVEdQz6bfO0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 11:12:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"user_id\": 1,\n        \"first_name\": \"Florine\",\n        \"last_name\": \"Conn\",\n        \"email\": \"mdmehedihasan2360@gmail.com\",\n        \"advisor\": {\n            \"id\": 1,\n            \"first_name\": \"sfasdfsa\",\n            \"last_name\": \"sadfasfas\",\n            \"email\": \"safsadfdsafas\",\n            \"phone\": \"fsadfsa\",\n            \"address\": null,\n            \"designation\": null,\n            \"profile_photo\": null,\n            \"families_helped\": null,\n            \"experience\": 3,\n            \"operating_in\": null\n        },\n        \"saved_communities\": [\n            {\n                \"id\": 1,\n                \"name\": \"Hermann\",\n                \"address\": \"Baer\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2162.637791\",\n                \"slug\": \"slug-name\",\n                \"services\": [\n                    {\n                        \"name\": \"test\",\n                        \"icon\": \"type\"\n                    },\n                    {\n                        \"name\": \"de\",\n                        \"icon\": \"type\"\n                    },\n                    {\n                        \"name\": \"asss\",\n                        \"icon\": \"type\"\n                    }\n                ],\n                \"total_reviews\": 2,\n                \"total_reviews_ratings\": [\n                    2,\n                    2\n                ],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            },\n            {\n                \"id\": 2,\n                \"name\": \"John\",\n                \"address\": \"Seo\",\n                \"price_start\": \"122\",\n                \"price_end\": \"-2167.567923\",\n                \"slug\": \"slug-name\",\n                \"services\": [],\n                \"total_reviews\": 0,\n                \"total_reviews_ratings\": [],\n                \"images\": [\n                    {\n                        \"id\": 1,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"url\": \"https://plus.unsplash.com/premium_photo-1661422278122-f75d0c7b655b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Refer List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndhdGl4b2xlbEBtYWlsaW5hdG9yLmNvbSIsImlkIjozOCwic3ViIjozOCwicm9sZSI6InVzZXIiLCJpYXQiOjE3MDAwMzY1NTV9.-XcdPbeDtg6jL7HCFxhKnrpLBVS-2ZriGFPQqgmreNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/user/dashboard/refer/list",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"dashboard",
+								"refer",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Refer List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/dashboard/refer/list",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"dashboard",
+										"refer",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"167-rE29LG1NPvtfUreQF3BQf/1E+KU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Oct 2023 12:13:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"first_name\": \"Florineasfdas\",\n            \"last_name\": \"Connasdfs\",\n            \"email\": \"mdmehedihasan2361@gmail.com\",\n            \"phone\": \"352-907-64fa35\",\n            \"refer_link\": null\n        },\n        {\n            \"id\": 3,\n            \"first_name\": \"Florineadfgsfdas\",\n            \"last_name\": \"Connasdffs\",\n            \"email\": \"mdmehedihasan2s361@gmail.com\",\n            \"phone\": \"352-907-6s4fa35\",\n            \"refer_link\": \"no link\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": []
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "create checkout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRhbmdlbG9fUm9iZXJ0czM1QGdtYWlsLmNvbSIsImlkIjoyLCJzdWIiOjIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzA0MDAzNjg3fQ.2nuHBS4VbDibnI1b10sWIDNiAKC9ZrVGHr3FM_vbdjQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"quantity\":2,\r\n            \"total\":330\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"quantity\":2,\r\n            \"total\":330\r\n        }\r\n    ],\r\n    \"shipping\":{\r\n        \"address_id\" : null,\r\n        \"name\":\"{{$randomFullName}}\",\r\n        \"city\":\"{{$randomCity}}\",\r\n        \"phone\":\"{{$randomPhoneNumber}}\",\r\n        \"email\":\"{{$randomEmail}}\",\r\n        \"country\":\"${{$randomCountry}}\"\r\n    },\r\n    \"billing\":{\r\n        \"address_id\" : null,\r\n        \"name\":\"{{$randomFullName}}\",\r\n        \"city\":\"{{$randomCity}}\",\r\n        \"phone\":\"{{$randomPhoneNumber}}\",\r\n        \"email\":\"{{$randomEmail}}\",\r\n        \"country\":\"${{$randomCountry}}\"\r\n\r\n    },\r\n    \"payment_method_id\":1,//payment mehtod id\r\n    \"note\":\"{{$randomLoremText}}\",\r\n    \"is_company_invoice\":true,//if invoice recieve a company yes=true,no-false\r\n    \"company_name\":\"{{$randomCompanyName}}\",//if invoice recieve a company yes\r\n    \"company_email\":\"{{$randomEmail}}\",//if invoice recieve a company yes\r\n    \"company_address\":\"{{$randomStreetAddress}}\",//if invoice recieve a company yes\r\n    \"company_tax\":\"{{$randomLoremText}}\"//if invoice recieve a company yes\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/checkout",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Md Mehedi Hasan/Pictures/2716505.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/attachments/upload-image",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"attachments",
+						"upload-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload image Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Md Mehedi Hasan/Pictures/2716505.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/attachments/upload-image",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"attachments",
+						"upload-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "settings",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/settings",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "features",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/v1/features",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google.meet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/v1/stripe/google/meet",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"stripe",
+						"google",
+						"meet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:8000",
+			"type": "default"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "HOST",
+			"value": "http://159.223.205.14/",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "HOST",
+			"value": "http://localhost:5000",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default",
+			"disabled": true
+		}
+	]
+}
