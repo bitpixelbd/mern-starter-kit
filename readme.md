@@ -1,4 +1,4 @@
-# Node-commerce
+# MERN Starter Kit
 
 1. `npm run setup`
 2. `npm run start`
