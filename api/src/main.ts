@@ -35,10 +35,10 @@ async function bootstrap() {
 
   app.enableShutdownHooks();
   const config = new DocumentBuilder()
-    .setTitle('Trace API')
+    .setTitle('Starter API')
     .setDescription('description')
     .setVersion('1.0.0')
-    .addTag('trace')
+    .addTag('starter')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-doc', app, document);

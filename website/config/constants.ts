@@ -20,7 +20,7 @@ export const CARE_TYPE_MEMORY = 'Memory Care';
 export const CARE_TYPE_INDEPENDENT = 'Independent Living';
 export const CARE_TYPE_ASSISTED = 'Assisted Care';
 
-
+export const LOCAL_STORAGE_USER_EMAIL = 'userEmail';
 
 /* pages */
 export const PAGE_HOME = '/';

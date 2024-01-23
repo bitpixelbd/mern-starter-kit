@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class UserRegisterDto {
     @IsString()
@@ -9,22 +9,17 @@ export class UserRegisterDto {
     @IsNotEmpty()
     email: string;
 
-    phone?: string;
 
     @IsString()
     @IsNotEmpty()
     password: string;
-
-    @IsNotEmpty()
-    @IsBoolean()
-    is_vendor:boolean
 }
 
 
 export class UserLoginDto {
     @IsNotEmpty()
     @IsString()
-    email_or_phone: string
+    email: string
 
     @IsNotEmpty()
     @IsString()

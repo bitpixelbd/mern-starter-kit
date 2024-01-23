@@ -1,6 +1,6 @@
 "use client";
 
-import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_TOKEN } from "@/config/constants";
+import { LOCAL_STORAGE_USER_EMAIL } from "@/config/constants";
 import ErrorMessage from "@/src/components/common/ErrorMessage";
 import Input from "@/src/components/forms/Input";
 import { post } from "@/src/services/api/api";
@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
-import { boolean, number, object, string } from "yup";
+import { object, string } from "yup";
 
 const RegisterPage = () => {
   const [userRole, setUserRole] = useState("customer");
@@ -49,16 +49,6 @@ const RegisterPage = () => {
     password: string().required("Password is required"),
   });
 
-  if (userRole === "vendor") {
-    userSchema = object({
-      name: string().required("Name is required"),
-      email: string().email().required("Email is required"),
-      password: string().required("Password is required"),
-      phone: string().required("Password is required"),
-      shop_name: string().required("Password is required"),
-      shop_url: string().required("Password is required"),
-    });
-  }
 
   const {
     control,
@@ -70,11 +60,8 @@ const RegisterPage = () => {
   const registerMutation = useMutation(async (data) => await post(API_REGISTRATION, data), {
     onSuccess: (res) => {
       const userInfo = encryptData(res.data);
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, userInfo);
-      window.localStorage.setItem(LOCAL_STORAGE_KEY_TOKEN, res?.data?.access_token);
-      window.localStorage.setItem("userRole", userRole);
-      // setCurrenForm(FORM_OTP);
-      router.push("/register/opt-verification")
+      window.localStorage.setItem(LOCAL_STORAGE_USER_EMAIL, res?.data?.email)
+      router.push("/register/otp-verification")
 
     },
     onError: (err) => {
@@ -89,16 +76,11 @@ const RegisterPage = () => {
     window.localStorage.setItem("userEmail", data?.email)
     const loginInfo: any = {
       name: data?.name,
-      phone: data?.phone,
       email: data?.email,
       password: data?.password
     }
-    if (userRole === 'vendor') {
-      loginInfo.shop_name = data?.shop_name
-      loginInfo.shop_url = data?.shop_url
-    }
 
-    registerMutation.mutate({ ...loginInfo, is_vendor: userRole === "customer" ? false : true });
+    registerMutation.mutate(loginInfo);
   };
 
   return (
@@ -124,23 +106,6 @@ const RegisterPage = () => {
               <Input register={register} name="password" isRequired={true} errors={errors} placeholder="Please Give password" type="password" />
             </div>
 
-            {/* <div className="form-group">
-              <input className="form-control" type="password" name="password_confirmation" id="txt-password-confirmation" autoComplete="new-password" placeholder="Password Confirmation" />
-
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Confirm Password"
-                {...register("first_name", {
-                  required: {
-                    value: true,
-                    message: "this field is required",
-                  },
-                })}
-              />
-
-              {errors.first_name && errors.first_name?.message && <ErrorMessage text={errors.first_name?.message} />}
-            </div> */}
 
             {userRole === "vendor" ? (
               <div className="show-if-vendor page_speed_1025113880">

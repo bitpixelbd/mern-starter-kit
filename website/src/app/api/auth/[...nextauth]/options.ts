@@ -1,3 +1,5 @@
+import { API_USER_VERIFY_OTP, USER_LOGIN_URL } from '@/src/services/api/endpoints'
+import axios from 'axios'
 import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -6,28 +8,39 @@ export const options: NextAuthOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {},
-            async authorize(credentials) {
+            async authorize(credentials: any) {
                 let user = null
-                const { email, password }: any = credentials
-                try {
-                    const response: any = await fetch(`http://localhost:8000/api/v1/auth/user/login`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            email_or_phone: email,
-                            password
+                if (credentials?.otpVerfication) {
+                    const { email, otp } = credentials
+                    console.log(email, otp)
+                    const response = await axios
+                        .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/${API_USER_VERIFY_OTP}`, {
+                            email, otp: Number(otp)
                         })
-                    })
-                    if (response) {
-                        const data = await response.json()
-                        user = data?.data
-                    }
-                    return user
-                } catch (err) {
-                    // console.log(err)
-                    return user
-                    throw new Error("Http e")
+                        .then(({ data }) => {
+                            return data?.data;
+                        })
+                        .catch((error) => {
+                            throw new Error(error?.response?.data?.message);
+                        });
+                    user = response
                 }
+                else {
+                    const { email, password }: any = credentials
+
+                    const response = await axios
+                        .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/${USER_LOGIN_URL}`, {
+                            email, password
+                        })
+                        .then(({ data }) => {
+                            return data?.data;
+                        })
+                        .catch((error) => {
+                            throw new Error(error?.response?.data?.message);
+                        });
+                    user = response
+                }
+                return user
             }
         })
     ],
@@ -36,14 +49,14 @@ export const options: NextAuthOptions = {
         signOut: '/signout'
     },
     callbacks: {
-        async jwt({ token, user }:any) {
+        async jwt({ token, user }: any) {
             if (user) {
                 token = { ...token, ...user }
                 token.sub = user.id
             }
             return token
         },
-        async session({ session, token }:any) {
+        async session({ session, token }: any) {
             if (session?.user) session.user = { ...session.user, ...token }
             return session
         },

@@ -24,13 +24,7 @@ export class UserAuthService {
         if (user === null) {
             throw new HttpException("User creation failed", HttpStatus.BAD_REQUEST)
         }
-        // const refer_link = `${process.env.WEBSITE_BASE_URL}?ref=u-${user.first_name}-${user.last_name}-${user.id}`
-        // const update_user = await this.prismaService.user.update({
-        //     where: { id: user.id }, data: {
-        //         refer_link
-        //     }
-        // })
-        // delete update_user['password']
+
         return user
     }
 
@@ -44,15 +38,7 @@ export class UserAuthService {
         return !!(check)
     }
 
-    // // async isUserPhoneVerified(phone: string): Promise<boolean> {
-    // //     const check = await this.prismaService.user.findFirst({ where: { phone } })
-    // //     return (check.is_verified)
-    // // }
 
-    // // async isUserEmailVerified(email: string): Promise<boolean> {
-    // //     const check = await this.prismaService.user.findFirst({ where: { email } })
-    // //     return (check.is_verified)
-    // // }
 
     async createOtp(data) {
         const otp_code = crypto.randomInt(100000, 999999)
@@ -73,27 +59,24 @@ export class UserAuthService {
     }
 
     async loginUser(data: UserLoginDto) {
-        const isEmail = await this.validateEmail(data.email_or_phone)
+        const isEmail = await this.validateEmail(data.email)
         let user = null
         if (!isEmail) {
             user = await this.prismaService.user.findFirst({
-                where: { phone: data.email_or_phone }
+                where: { phone: data.email }
             })
         } else {
             user = await this.prismaService.user.findFirst({
-                where: { email: data.email_or_phone }
+                where: { email: data.email }
             })
         }
-        // const user = await this.prismaService.user.findFirst({
-        //     where: { email: data.email }
-        // })
         if (user === null) {
             throw new HttpException("Invalid Credatials", HttpStatus.UNAUTHORIZED)
         }
         if (!user.is_verified) {
             throw new HttpException("This user is not verified", HttpStatus.NOT_ACCEPTABLE)
         }
-        
+
         const isPasswordMatch = await bcrypt.compare(data.password, user?.password)
         if (!isPasswordMatch) {
             throw new HttpException("Invalid Credatials", HttpStatus.UNAUTHORIZED)
@@ -123,38 +106,16 @@ export class UserAuthService {
         })
         await this.prismaService.otpVerification.delete({ where: { id: verify.id, email: verify.email } })
 
-        const role = user.is_vendor ? ROLE_VENDOR : ROLE_USER
 
-        const access_token = await this.jwtSignService.signJwt({ email: user.email, phone: user.phone, id: user.id }, role);
+        const access_token = await this.jwtSignService.signJwt({ email: user.email, phone: user.phone, id: user.id });
         delete user['password'];
         return {
             ...user,
             access_token,
-            role
         };
 
     }
 
-    // async createReferRequest(ref_by: string, user_id: number) {
-    //     const data: any = {}
-    //     const ref_by_req = ref_by?.split("-")
-    //     if (ref_by_req[0] === "u") {
-    //         const valid_user = await this.prismaService.user.findFirst({ where: { id: Number(ref_by_req[3]), first_name: ref_by_req[1], last_name: ref_by_req[2] } })
-    //         if (valid_user !== null) {
-    //             data.refer_by_user = valid_user.id
-    //             data.type = ReferralTYPE.USER
-    //         }
-    //     }
-    //     else if (ref_by_req[0] === "p") {
-    //         const valid_partner = await this.prismaService.partner.findFirst({ where: { id: Number(ref_by_req[3]), first_name: ref_by_req[1], last_name: ref_by_req[2] } })
-    //         if (valid_partner !== null) {
-    //             data.refer_by_partner = valid_partner?.id
-    //             data.type = ReferralTYPE.PARTNER
-    //         }
-    //     }
-    //     data.user_id = user_id
-    //     const referral = await this.prismaService.referral.create({ data })
-    // }
 
     async validateEmail(email) {
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;

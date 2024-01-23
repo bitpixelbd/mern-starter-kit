@@ -12,4 +12,8 @@ export const API_REGISTRATION = "auth/user/register"
 // export const API_POST_VERIFY_OTP = "auth/user/otp/verify"
 export const API_USER_VERIFY_OTP = "auth/user/otp/verify"
 
+export const USER_LOGIN_URL = 'auth/user/login';
+
+
+
 export const DASHBOARD_URL = '/dashboard'

@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 services:
   database:
     image: postgres
@@ -21,13 +21,13 @@ services:
     container_name: ${PROJECT_NAME}-redis
     restart: always
     ports:
-      - '6379:6379'
+      - "6379:6379"
     command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASS}
     volumes:
       - ./cache:/redis-data
     networks:
-      - espd_internal
-      - espd_web
+      - starter_internal
+      - starter_web
 
   server:
     build:
@@ -42,14 +42,14 @@ services:
     # Run a command against the development stage of the image
     #command: npm run start:dev
     ports:
-      - '8000:8000'
+      - "8000:8000"
     volumes:
       - ./public/uploads:/public/uploads
     depends_on:
       - database
     networks:
-      - espd_internal
-      - espd_api
+      - starter_internal
+      - starter_api
 
   adminer:
     image: adminer
@@ -58,14 +58,14 @@ services:
     ports:
       - 8080:8080
     networks:
-      - espd_internal
-      - espd_web
+      - starter_internal
+      - starter_web
 
   website:
     build:
       context: ./website
       dockerfile: Dockerfile
-    command: 'npm start'
+    command: "npm start"
     container_name: ${PROJECT_NAME}-website
     ports:
       - 3000:3000
@@ -74,14 +74,14 @@ services:
     depends_on:
       - server
     networks:
-      - espd_api
+      - starter_api
 
   admin-panel:
     container_name: ${PROJECT_NAME}-admin-panel
     build:
       context: ./admin
       dockerfile: Dockerfile
-    command: 'npm run preview'
+    command: "npm run preview"
     ports:
       - 3001:8000
     env_file:
@@ -89,15 +89,14 @@ services:
     depends_on:
       - server
     networks:
-      - espd_api
+      - starter_api
 
 volumes:
-  espd_pgdata:
+  starter_pgdata:
   pgadmin-data:
 
-
 networks:
-  espd_internal:
+  starter_internal:
     internal: true
-  espd_api:
-  espd_web:
+  starter_api:
+  starter_web:

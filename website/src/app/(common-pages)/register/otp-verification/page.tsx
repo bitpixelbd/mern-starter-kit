@@ -4,7 +4,7 @@
 // import SvgIcon from "@/components/SvgIcon";
 // import { post } from "@/services/api/api";
 // import { API_POST_QUIZ_ANSWERS } from "@/services/api/endpoints";
-import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_REDIRECT_URL, LOCAL_STORAGE_KEY_TOKEN, ROLE_USER } from "@/config/constants";
+import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_REDIRECT_URL, LOCAL_STORAGE_KEY_TOKEN, LOCAL_STORAGE_USER_EMAIL, ROLE_USER } from "@/config/constants";
 import { post } from "@/src/services/api/api";
 import { API_USER_VERIFY_OTP, DASHBOARD_URL } from "@/src/services/api/endpoints";
 import { encryptData } from "@/src/services/encryptUtil";
@@ -17,6 +17,7 @@ import OtpInput from 'react-otp-input';
 import { useMutation } from "react-query";
 import { object, string } from "yup";
 import './otpPageStyle.css';
+import { signIn } from "next-auth/react";
 
 type Payload = {
     email: string | null;
@@ -59,35 +60,19 @@ export default function OtpVerify() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(loginSchema) });
 
-    // const postQuizAnswerMutation = useMutation(
-    // async (data: QuizAnswersPayload) => await post(API_POST_QUIZ_ANSWERS, data),
-    // );
-
 
     const verifyOtpMutation = useMutation(
-        async (data: Payload) => await post(API_USER_VERIFY_OTP, data),
+        async (data: Payload) => await signIn("credentials", { ...data, redirect: false, otpVerfication: true }),
         {
-            onSuccess: (res) => {
-                // if (forgotVerify) {
-                //     setCurrent("password")
-                //     window.localStorage.setItem('reset_pass_token', res?.data?.token)
-                //     return
-                // }
-                const userInfo = encryptData(res.data);
-                window.localStorage.setItem(LOCAL_STORAGE_KEY, userInfo);
-                window.localStorage.setItem(LOCAL_STORAGE_KEY_TOKEN, res?.data?.access_token);
-                window.localStorage.setItem("userRole", userRole);
-
-
-                const saved_redirect = window.localStorage.getItem(LOCAL_STORAGE_KEY_REDIRECT_URL);
-
-                if (saved_redirect) {
-                    window.localStorage.removeItem(LOCAL_STORAGE_KEY_REDIRECT_URL)
-                    router.replace(saved_redirect)
-                    window.location.reload()
-                } else {
-                    router.replace(REDIRECT_URL)
+            onSuccess: async (res) => {
+                if (res?.ok) {
+                    window.localStorage.removeItem(LOCAL_STORAGE_USER_EMAIL)
+                    router.push("/");
                 }
+                if (!res?.ok) {
+                    setError(res?.error)
+                }
+
 
             },
             onError: (err) => {
