@@ -1,22 +1,38 @@
 #!/usr/bin/env bash
 
-echo 'Setting up api...'
+echo 'Setting things up...'
+
+if ! test -f .env; then
+  echo ".env does not exist."
+  cp .env.example .env
+fi
+
+npm install
 
 cd api
 
-cp .env.example .env
+if ! test -f .env; then
+  echo ".env does not exist."
+  cp .env.example .env
+fi
 
 npm install
 
 cd ../admin
 
-cp .env.example .env
+if ! test -f .env; then
+  echo ".env does not exist."
+  cp .env.example .env
+fi
 
 npm install
 
 cd ../website
 
-cp .env.example .env.local
+if ! test -f .env; then
+  echo ".env does not exist."
+  cp .env.example .env.local
+fi
 
 npm install
 

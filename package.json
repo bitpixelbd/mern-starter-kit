@@ -3,20 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@reduxjs/toolkit": "^2.0.1",
-    "concurrently": "^7.5.0",
-    "luxon": "^3.4.3",
-    "next-auth": "^4.24.5",
-    "react-icons": "^4.12.0",
-    "react-redux": "^9.0.4",
-    "react-use-cart": "^1.13.0",
-    "run": "^1.4.0",
-    "sharp": "^0.33.1",
-    "swiper": "^11.0.5",
-    "web-vitals": "^1.0.1"
+    "concurrently": "^7.5.0"
   },
   "scripts": {
     "start": "concurrently \"cd api && npm run start:dev\" \"cd admin && npm run dev\" \"cd website && npm run dev\"",

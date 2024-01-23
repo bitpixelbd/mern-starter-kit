@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "admin",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -79,5 +79,5 @@
       "\\.(css|less)$": "identity-obj-proxy"
     }
   }
- 
+
 }
