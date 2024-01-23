@@ -1,12 +1,8 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import { BASE_URL } from "../../../config/config";
-import {
-	metaDesc,
-	metaKeywords,
-	metaSiteTitle,
-} from "../../../config/defaultMetaConfig";
-import useGetSetting from "@/hooks/useGetSetting";
+
+import useGetSetting from "@/src/hooks/useGetSetting";
+import { metaDesc, metaKeywords, metaSiteTitle } from "@/config/defaultMetaConfig";
 
 interface CustomHeadProps {
 	title?: string;
@@ -36,9 +32,7 @@ export const CustomHead = ({
 	description = description ? description : metaDesc;
 	keywords = keywords ? keywords : metaKeywords;
 	author = author ? author : "On Party";
-	url = url ? url : BASE_URL;
 	type = type || "website";
-	image = image || BASE_URL + "/logo.png";
 
 	const {settingsData} = useGetSetting()
 
@@ -48,7 +42,7 @@ export const CustomHead = ({
 	return (
 		<Head>
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			
+
 			<link rel="shortcut icon" href={faviconUrl} />
 			<link rel="icon" type="image/x-icon" href={faviconUrl} />
 			<link

@@ -2,7 +2,7 @@ version: "3.9"
 services:
   database:
     image: postgres
-    container_name: ${PROJECT_NAME}-db
+    container_name: starter-db
     env_file:
       - .env
     environment:
@@ -14,7 +14,7 @@ services:
     volumes:
       - ./pg-data:/var/lib/postgresql/data
     networks:
-      - espd_internal
+      - starter_internal
 
   redis:
     image: redis:7.0.11-alpine
