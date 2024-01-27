@@ -2,7 +2,7 @@
 
 githubuser=rashidul-hasan
 githubpass=
-repo=upscalers-backend
+repo=starter
 branch=master
 
 git pull "https://$githubuser:$githubpass@github.com/$githubuser/$repo.git" $branch

@@ -14,9 +14,9 @@ import "./globals.css";
 
 export const metadata = {
   title: {
-    template: "noe-commerce | %s",
+    template: "starter | %s",
   },
-  description: "node-commerce",
+  description: "starter",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
