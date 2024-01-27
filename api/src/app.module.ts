@@ -3,20 +3,21 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { BullModule } from '@nestjs/bull';
+import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
+import { AppProcessor } from './app.processor';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+import { AttachmentsModule } from './attachments/attachments.module';
+import { PROCESSOR } from './common/constants';
 import configuration from './config';
 import { CrudModule } from './crud/crud.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { UsersModule } from './users/users.module';
-import { AdminModule } from './admin/admin.module';
-import { AttachmentsModule } from './attachments/attachments.module';
-import { BullModule } from '@nestjs/bull';
-import { AppProcessor } from './app.processor';
-import { PROCESSOR } from './common/constants';
 import { EmailModule } from './email/email.module';
 import { PasswordModule } from './password/password.module';
+import { PrismaModule } from './prisma/prisma.module';
+// import { AuthModule } from './user-auth/user-auth.module';
+import { UserAuthModule } from './user-auth/user-auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { PasswordModule } from './password/password.module';
     ),
     PrismaModule,
     CrudModule,
-    AuthModule,
+    UserAuthModule,
     AttachmentsModule,
     UsersModule,
     AdminModule,

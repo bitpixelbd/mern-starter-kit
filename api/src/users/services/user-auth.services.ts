@@ -2,8 +2,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
-import { JwtSignService } from "src/auth/jwt.sign.service";
 import { ROLE_USER, ROLE_VENDOR } from "src/common/constants";
+import { JwtSignService } from "src/user-auth/jwt.sign.service";
 
 import { PrismaService } from '../../prisma/prisma.service';
 import { UserLoginDto, UserRegisterDto, VerifyOtpDto } from "../dto/user-auth.dto";

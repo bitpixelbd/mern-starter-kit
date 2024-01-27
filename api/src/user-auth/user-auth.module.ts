@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+
 import { EmailModule } from '../email/email.module';
+import { PrismaModule } from '../prisma/prisma.module';
+import { AdminLoginController } from './admin.login.controller';
+import { AdminPasswordResetService } from './admin.password-reset.service';
 // import { UsersModule } from '../users/users.module';
 import { AuthService } from './auth.service';
 import { JwtSignService } from './jwt.sign.service';
+import { JwtStrategy } from './jwt/jwt.strategy';
+import { LocalAdminStrategy } from "./local-admin.auth";
 // import { AuthController } from './auth.controller';
 // import { RegisterController } from './register.controller';
 import { LoginController } from './login.controller';
@@ -12,14 +20,9 @@ import { LoginController } from './login.controller';
 // import {VerifyEmailService} from './verify-email.service';
 // import {RegisterService} from './register.service';
 // import {InfoService} from './info.service';
-import {LoginService} from './login.service';
-import { PrismaModule } from '../prisma/prisma.module';
-import { PassportModule } from '@nestjs/passport';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import {JwtStrategy} from './jwt/jwt.strategy';
-import { AdminLoginController } from './admin.login.controller';
-import { LocalAdminStrategy } from "./local-admin.auth";
-import { AdminPasswordResetService } from './admin.password-reset.service';
+import { LoginService } from './login.service';
+import { OtpController } from './otp.controller';
+import { OtpService } from './otp.service';
 
 @Module({
   imports: [
@@ -31,7 +34,7 @@ import { AdminPasswordResetService } from './admin.password-reset.service';
         secret: configService.get<string>('jwt_secret'),
         // privateKey: configService.get<string>('keys.privateKey'),
         // publicKey: configService.get<string>('keys.publicKey'),
-        signOptions: { /*expiresIn: '86400s', */algorithm: 'HS256' },
+        signOptions: { /* expiresIn: '86400s', */algorithm: 'HS256' },
       }),
       inject: [ConfigService],
     }),
@@ -43,6 +46,7 @@ import { AdminPasswordResetService } from './admin.password-reset.service';
     AuthService,
     LoginService,
     AdminPasswordResetService,
+    OtpService,
     // InfoService,
     // RegisterService,
     JwtStrategy,
@@ -56,6 +60,7 @@ import { AdminPasswordResetService } from './admin.password-reset.service';
     // RegisterController,
     LoginController,
     AdminLoginController,
+    OtpController
   ],
 })
-export class AuthModule {}
+export class UserAuthModule { }

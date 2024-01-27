@@ -1,16 +1,17 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Post, Request } from '@nestjs/common';
+
 import { res } from '../common/response.helper';
-import { LoginService } from './login.service';
 import { LoginUserDto } from './dto/loginUser.dto';
+import { LoginService } from './login.service';
 
 @Controller()
 export class LoginController {
   constructor(
     private readonly loginService: LoginService,
-  ) {}
+  ) { }
 
-  /*@UseGuards(LocalAuthGuard)*/
-  @Post('login')
+  /* @UseGuards(LocalAuthGuard)*/
+  @Post('firebase-login')
   async login(@Request() req, @Body() payload: LoginUserDto) {
     const isValid = await this.loginService.verifyPhoneNumber(payload.phone, payload.idToken);
     if (!isValid) {

@@ -1,28 +1,26 @@
 /*eslint-disable */
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { Role } from '../user-auth/dto/role.enum';
+import { HasRoles } from '../user-auth/jwt/has-roles.decorator';
+import { JwtAuthGuard } from '../user-auth/jwt/jwt-auth.guard';
+import { RolesGuard } from '../user-auth/jwt/roles.guard';
 import { CrudService } from './crud.service';
-import { CreateCrudDto } from './dto/create-crud.dto';
-import { UpdateCrudDto } from './dto/update-crud.dto';
-import { HasRoles } from '../auth/jwt/has-roles.decorator';
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
-import { RolesGuard } from '../auth/jwt/roles.guard';
-import { Role } from '../auth/dto/role.enum';
 
 @HasRoles(Role.Admin)
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('crud')
 export class CrudController {
-  constructor(private readonly crudService: CrudService) {}
+  constructor(private readonly crudService: CrudService) { }
 
   //TODO validate model name
   //TODO validate request body based on model

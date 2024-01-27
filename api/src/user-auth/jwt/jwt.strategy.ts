@@ -1,9 +1,9 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
-//https://docs.nestjs.com/security/authentication#implementing-passport-jwt
+// https://docs.nestjs.com/security/authentication#implementing-passport-jwt
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       first_name: payload.first_name,
       last_name: payload.last_name,
       email: payload.email,
-      role:payload.role
+      role: payload.role
     };
   }
 }

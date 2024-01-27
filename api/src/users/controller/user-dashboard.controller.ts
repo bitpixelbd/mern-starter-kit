@@ -1,18 +1,19 @@
-import { Controller, Get, Req, UseGuards, Patch, Body, Post } from "@nestjs/common";
-import { UserDashBoardService } from '../services/user-dashboard.service';
-import { HasRoles } from "src/auth/jwt/has-roles.decorator";
-import { Role } from "src/auth/dto/role.enum";
-import { JwtAuthGuard } from "src/auth/jwt/jwt-auth.guard";
-import { RolesGuard } from "src/auth/jwt/roles.guard";
-import { res } from "src/common/response.helper";
-import { UpdatePasswordDto } from "../dto/updatePasswordDto";
-import { UserSendMessageDto } from "../dto/advior-message.dto";
+import { Body, Controller, Get, Patch, Post, Req, UseGuards } from "@nestjs/common";
+// import { res } from "src/common/response.helper";
+// import { Role } from "src/user-auth/dto/role.enum";
+// import { HasRoles } from "src/user-auth/jwt/has-roles.decorator";
+// import { JwtAuthGuard } from "src/user-auth/jwt/jwt-auth.guard";
+// import { RolesGuard } from "src/user-auth/jwt/roles.guard";
 
-@HasRoles(Role.User)
-@UseGuards(JwtAuthGuard, RolesGuard)
+// import { UserSendMessageDto } from "../dto/advior-message.dto";
+// import { UpdatePasswordDto } from "../dto/updatePasswordDto";
+// import { UserDashBoardService } from '../services/user-dashboard.service';
+
+// @HasRoles(Role.User)
+// @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('user/dashboard')
 export class UserDashBoardController {
-    constructor(private readonly userDashBoardService: UserDashBoardService) { }
+    constructor() { }
 
     // @Patch('update/profile')
     // async updateUserProfile(@Req() req, @Body() data) {

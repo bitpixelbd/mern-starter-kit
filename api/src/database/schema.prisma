@@ -87,6 +87,7 @@ model Address {
   country            String? @db.VarChar(200)
   is_billing_address Boolean @default(true)
   User               User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
   @@map(name: "addresses")
 }
 
@@ -119,65 +120,71 @@ model ResetPassword {
   @@map(name: "reset_password")
 }
 
-
-
 model Product {
-  id             Int              @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   name           String
-  permalink      String?          @db.VarChar(200)
+  permalink      String?  @db.VarChar(200)
   description    String?
   content        String?
-  sku            String?          @db.VarChar(200)
+  sku            String?  @db.VarChar(200)
   price          Float?
   discount_id    Int?
   cost_pert_item Float?
-  barcode        String?          @db.VarChar(200)
-  stock_status   String?          @db.VarChar(200)
+  barcode        String?  @db.VarChar(200)
+  stock_status   String?  @db.VarChar(200)
   stock_quantity Int?
   weight         Float?
   length         Float?
   wide           Float?
   height         Float?
-  status         String?          @db.VarChar(200)
+  status         String?  @db.VarChar(200)
   store_id       Int?
   is_featured    Boolean?
   category_id    Int?
   brand_id       Int?
   featured_image String?
-  collection_tag String?          @db.VarChar(200)
-  label          String?          @db.VarChar(200)
+  collection_tag String?  @db.VarChar(200)
+  label          String?  @db.VarChar(200)
 
   @@map(name: "products")
 }
 
-
-
 model User {
-  id              Int               @id @default(autoincrement())
-  name            String
-  email           String            @unique @db.VarChar(200)
-  phone           String?           @unique @db.VarChar(200)
-  password        String
-  status          String?           @db.VarChar(200)
-  profile_image   String?
-  private_notes   String?
-  is_verified     Boolean           @default(false)
-  address         String?
-  description     String?
-  Address         Address[]
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique @db.VarChar(200)
+  phone         String?   @unique @db.VarChar(200)
+  password      String
+  status        String?   @db.VarChar(200)
+  profile_image String?
+  private_notes String?
+  is_verified   Boolean   @default(false)
+  address       String?
+  description   String?
+  Address       Address[]
 
   @@map(name: "users")
 }
 
+model TestUser {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String? @db.VarChar(200)
+  phone    String? @db.VarChar(200)
+  password String?
+
+  @@map(name: "test_users")
+}
+
 model Page {
-  id          Int       @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   permalink   String?
-  description String?   @db.VarChar(200)
-  content     String?   @db.VarChar(200)
-  status      String?   @db.VarChar(200)
-  templete    String?   @db.VarChar(200)
-  image       String?   @db.VarChar(200)
+  description String? @db.VarChar(200)
+  content     String? @db.VarChar(200)
+  status      String? @db.VarChar(200)
+  templete    String? @db.VarChar(200)
+  image       String? @db.VarChar(200)
   Faq         Faq[]
 
   @@map(name: "pages")
@@ -194,15 +201,15 @@ model Faq {
 }
 
 model Blog {
-  id              Int       @id @default(autoincrement())
-  title           String
-  author_name     String?
-  category        String?   @db.VarChar(200)
-  short_desc      String?   @db.VarChar(200)
-  description     String?   @db.VarChar(200)
-  content         String?   @db.VarChar(200)
-  author_image    String?   @db.VarChar(200)
-  blog_image      String?   @db.VarChar(200)
+  id           Int     @id @default(autoincrement())
+  title        String
+  author_name  String?
+  category     String? @db.VarChar(200)
+  short_desc   String? @db.VarChar(200)
+  description  String? @db.VarChar(200)
+  content      String? @db.VarChar(200)
+  author_image String? @db.VarChar(200)
+  blog_image   String? @db.VarChar(200)
 
   @@map(name: "blogs")
 }
