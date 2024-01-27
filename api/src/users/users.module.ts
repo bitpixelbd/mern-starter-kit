@@ -39,7 +39,7 @@ import { UserDashBoardService } from './services/user-dashboard.service';
     }),
     ConfigModule,
     BullModule.registerQueueAsync(
-      { name: PROCESSOR.NAMES.SENIOR_PLACES, }
+      { name: PROCESSOR.QUEUES.MAIN, }
     ),
   ],
   controllers: [

@@ -9,7 +9,7 @@ import { PROCESSOR } from 'src/common/constants';
   imports: [
     ConfigModule,
     BullModule.registerQueueAsync({
-      name: PROCESSOR.NAMES.SENIOR_PLACES,
+      name: PROCESSOR.QUEUES.MAIN,
     }),
   ],
   controllers: [],

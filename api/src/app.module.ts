@@ -6,16 +6,13 @@ import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bull';
 import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
-import { AppProcessor } from './app.processor';
 import { AppService } from './app.service';
 import { AttachmentsModule } from './attachments/attachments.module';
 import { PROCESSOR } from './common/constants';
 import configuration from './config';
 import { CrudModule } from './crud/crud.module';
 import { EmailModule } from './email/email.module';
-import { PasswordModule } from './password/password.module';
 import { PrismaModule } from './prisma/prisma.module';
-// import { AuthModule } from './user-auth/user-auth.module';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { UsersModule } from './users/users.module';
 
@@ -34,7 +31,7 @@ import { UsersModule } from './users/users.module';
     }),
     BullModule.registerQueueAsync(
       {
-        name: PROCESSOR.NAMES.SENIOR_PLACES,
+        name: PROCESSOR.QUEUES.MAIN,
       }
     ),
     PrismaModule,
@@ -45,9 +42,8 @@ import { UsersModule } from './users/users.module';
     AdminModule,
     UsersModule,
     EmailModule,
-    PasswordModule
   ],
   controllers: [AppController],
-  providers: [AppService, AppProcessor],
+  providers: [AppService],
 })
 export class AppModule { }

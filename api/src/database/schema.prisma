@@ -56,7 +56,7 @@ model Newsletter {
 model OtpVerification {
   id    Int     @id @default(autoincrement())
   otp   Int
-  email String  @unique @db.VarChar(200)
+  email String? @unique @db.VarChar(200)
   phone String? @db.VarChar(200)
 
   @@map(name: "otp_verifications")

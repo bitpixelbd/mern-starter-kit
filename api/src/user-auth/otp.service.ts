@@ -1,15 +1,13 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { AdminUser, Prisma, User } from "@prisma/client";
-import * as bcryptjs from 'bcryptjs';
+import {Injectable} from '@nestjs/common';
+import {JwtService} from '@nestjs/jwt';
 import * as crypto from 'crypto';
 
-import { PrismaService } from '../prisma/prisma.service';
+import {PrismaService} from '../prisma/prisma.service';
 
 @Injectable()
 export class OtpService {
   constructor(private jwtService: JwtService,
-    private prisma: PrismaService) { }
+    private prismaService: PrismaService) { }
 
   async createOtp(data) {
     const otp_code = crypto.randomInt(100000, 999999)

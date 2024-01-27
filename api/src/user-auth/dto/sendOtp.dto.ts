@@ -1,4 +1,5 @@
 export class SendOtpDto {
-  email: string;
-  action: string = 'register';
+  // email: string;
+  phone: string;
+  // action: string = 'register';
 }

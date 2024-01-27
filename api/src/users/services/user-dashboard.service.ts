@@ -1,11 +1,8 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { UpdatePasswordDto } from '../dto/updatePasswordDto';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {PrismaService} from '../../prisma/prisma.service';
+import {UpdatePasswordDto} from '../dto/updatePasswordDto';
 import * as bcrypt from 'bcryptjs';
-// import { ReferralStatus } from '@prisma/client';
 import EmailService from '../../email/email.service';
-import { images } from 'src/common/constants';
-import { UserSendMessageDto } from '../dto/advior-message.dto';
 
 @Injectable()
 export class UserDashBoardService {
