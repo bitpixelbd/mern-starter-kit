@@ -2,8 +2,8 @@ import { Body, Controller, Post, Request } from '@nestjs/common';
 
 import { res } from '../common/response.helper';
 import { AdminPasswordResetService } from './admin.password-reset.service';
-import { OtpService } from './otp.service';
 import {SendOtpDto} from "./dto/sendOtp.dto";
+import { OtpService } from './otp.service';
 
 @Controller('auth')
 export class OtpController {
@@ -14,14 +14,17 @@ export class OtpController {
 
   @Post('send-otp')
   async sendOtp(@Request() req, @Body() payload: SendOtpDto) {
-    const otp_req = await this.otpService.createOtp({ phone: payload.phone })
+    // console.log(payload?.phone);
 
+    const otp_req = await this.otpService.createOtp(payload?.phone);
+
+    const testUser  = await this.otpService.getTestUser(payload?.phone);
+    if(testUser){
+      return res.success({otp: otp_req?.otp}, 201)
+    }
     const text = `Welcome to ${process.env.APP_NAME}. Your OTP is: ${otp_req.otp}`
 
-    /*if (!is_debug_mode) {
-      await this.smsService.sendSMS(payload.phone, text);
-      resData = ''
-    }*/
+    await this.smsService.sendSMS(payload.phone, text);
 
     return res.success({}, 201)
   }

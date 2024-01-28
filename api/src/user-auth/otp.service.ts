@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, Injectable} from '@nestjs/common';
 import {JwtService} from '@nestjs/jwt';
 import * as crypto from 'crypto';
 
@@ -13,13 +13,6 @@ export class OtpService {
     const otp_code = crypto.randomInt(100000, 999999)
     data.otp = `${otp_code}`
 
-
-    // Ignore these number for opt creation
-    const ignoreNumber = ['+8801571711909']
-    if (ignoreNumber.includes(data.phone)) {
-      return data
-    }
-
     const is_email_exist = await this.prismaService.otpVerification.findFirst({ where: { phone: data.phone } })
 
     if (is_email_exist !== null) {
@@ -30,5 +23,14 @@ export class OtpService {
     }
     return await this.prismaService.otpVerification.create({ data })
 
+  }
+
+
+  async getTestUser (phone: string) {
+    const testUser = await this.prismaService.testUser.findFirst(
+    { where: { phone }});
+
+    
+    return testUser
   }
 }
