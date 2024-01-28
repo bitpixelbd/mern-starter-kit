@@ -4,17 +4,17 @@ import { res } from '../common/response.helper';
 import { AdminPasswordResetService } from './admin.password-reset.service';
 import {SendOtpDto} from "./dto/sendOtp.dto";
 import { OtpService } from './otp.service';
+import SmsService from "../email/sms.service";
 
 @Controller('auth')
 export class OtpController {
   constructor(
     private readonly otpService: OtpService,
-    private readonly adminPasswordResetService: AdminPasswordResetService,
+    private readonly smsService: SmsService,
   ) { }
 
   @Post('send-otp')
   async sendOtp(@Request() req, @Body() payload: SendOtpDto) {
-    // console.log(payload?.phone);
 
     const otp_req = await this.otpService.createOtp(payload?.phone);
 
@@ -24,7 +24,9 @@ export class OtpController {
     }
     const text = `Welcome to ${process.env.APP_NAME}. Your OTP is: ${otp_req.otp}`
 
-    await this.smsService.sendSMS(payload.phone, text);
+    if (process.env.NODE_ENV !== 'development') {
+      await this.smsService.sendSMS(payload.phone, text);
+    }
 
     return res.success({}, 201)
   }

@@ -9,15 +9,17 @@ export class OtpService {
   constructor(private jwtService: JwtService,
     private prismaService: PrismaService) { }
 
-  async createOtp(data) {
+  async createOtp(phone: string) {
+    let data:any = {};
     const otp_code = crypto.randomInt(100000, 999999)
     data.otp = `${otp_code}`
+    data.phone = phone
 
-    const is_email_exist = await this.prismaService.otpVerification.findFirst({ where: { phone: data.phone } })
+    const is_email_exist = await this.prismaService.otpVerification.findFirst({ where: { phone: phone } })
 
     if (is_email_exist !== null) {
       return this.prismaService.otpVerification.update({
-        where: { phone: is_email_exist.phone, id: is_email_exist.id },
+        where: { id: is_email_exist.id },
         data
       })
     }
@@ -30,7 +32,7 @@ export class OtpService {
     const testUser = await this.prismaService.testUser.findFirst(
     { where: { phone }});
 
-    
+
     return testUser
   }
 }

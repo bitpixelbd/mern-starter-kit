@@ -9,15 +9,12 @@ import SmsService from 'src/email/sms.service';
 import { JwtSignService } from 'src/user-auth/jwt.sign.service';
 
 import { PrismaModule } from '../prisma/prisma.module';
-import { UserAuthController } from './controller/user-auth.controller';
 import { UserDashBoardController } from './controller/user-dashboard.controller';
-import { UserAuthService } from './services/user-auth.services';
 import { UserDashBoardService } from './services/user-dashboard.service';
 
 
 @Module({
   providers: [
-    UserAuthService,
     JwtSignService,
     SmsService,
     EmailService,
@@ -43,7 +40,6 @@ import { UserDashBoardService } from './services/user-dashboard.service';
     ),
   ],
   controllers: [
-    UserAuthController,
     UserDashBoardController,
   ]
 })
