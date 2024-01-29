@@ -52,10 +52,6 @@ export class AdminAuthService {
       subject: 'Forgot password',
       text,
     });
-    /* if (process.env.NODE_ENV !== 'development') {
-
-    }*/
-
     return true;
 
   }
