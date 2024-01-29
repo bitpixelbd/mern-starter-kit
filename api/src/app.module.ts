@@ -40,7 +40,6 @@ import { UsersModule } from './users/users.module';
     AttachmentsModule,
     UsersModule,
     AdminModule,
-    UsersModule,
     EmailModule,
   ],
   controllers: [AppController],

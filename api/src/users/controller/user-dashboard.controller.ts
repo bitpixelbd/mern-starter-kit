@@ -1,27 +1,35 @@
-import { Body, Controller, Get, Patch, Post, Req, UseGuards } from "@nestjs/common";
-// import { res } from "src/common/response.helper";
-// import { Role } from "src/user-auth/dto/role.enum";
-// import { HasRoles } from "src/user-auth/jwt/has-roles.decorator";
-// import { JwtAuthGuard } from "src/user-auth/jwt/jwt-auth.guard";
-// import { RolesGuard } from "src/user-auth/jwt/roles.guard";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Body, Controller, Get, Patch, Req, UseGuards } from "@nestjs/common";
+import { res } from "src/common/response.helper";
+import { JwtAuthGuard } from "src/user-auth/jwt/jwt-auth.guard";
 
-// import { UserSendMessageDto } from "../dto/advior-message.dto";
-// import { UpdatePasswordDto } from "../dto/updatePasswordDto";
-// import { UserDashBoardService } from '../services/user-dashboard.service';
+import { UserDashBoardService } from "../services/user-dashboard.service";
 
-// @HasRoles(Role.User)
-// @UseGuards(JwtAuthGuard, RolesGuard)
-@Controller('user/dashboard')
+@UseGuards(JwtAuthGuard)
+@Controller('user-profile')
 export class UserDashBoardController {
-    constructor() { }
+    constructor(
+        private readonly userDashboardService: UserDashBoardService
+    ) { }
+    @Get('user')
+    async recommendedCommunities(@Req() req) {
+        const { id } = req.user;
+        const response = await this.userDashboardService.getUser(+id)
+        return res.success(response);
+    }
 
-    // @Patch('update/profile')
-    // async updateUserProfile(@Req() req, @Body() data) {
-    //     const user = req?.user
-    //     const id = user?.id
-    //     const response = await this.userDashBoardService.updateUserProfile(data, Number(id))
-    //     return res.success(response)
-    // }
+    @Patch('update')
+    async updateUserProfile(@Req() req, @Body() data) {
+        const { id } = req.user;
+        const response = await this.userDashboardService.updateUserProfile(data, Number(id))
+        return res.success(response)
+    }
+
+
+
+
+
 
     // @Patch('update/password')
     // async updateUserPassword(@Req() req, @Body() data: UpdatePasswordDto) {
@@ -31,13 +39,7 @@ export class UserDashBoardController {
     //     return res.success(response)
     // }
 
-    // @Get('profile')
-    // async getUser(@Req() req) {
-    //     const user = req?.user
-    //     const id = user?.id
-    //     const response = await this.userDashBoardService.getUser(Number(id))
-    //     return res.success(response)
-    // }
+
 
     // @Get('recommended/communities')
     // async recommendedCommunities(@Req() req) {

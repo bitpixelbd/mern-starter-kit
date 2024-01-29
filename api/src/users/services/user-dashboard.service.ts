@@ -1,8 +1,9 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {PrismaService} from '../../prisma/prisma.service';
-import {UpdatePasswordDto} from '../dto/updatePasswordDto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
+
 import EmailService from '../../email/email.service';
+import { PrismaService } from '../../prisma/prisma.service';
+import { UpdatePasswordDto } from '../dto/updatePasswordDto';
 
 @Injectable()
 export class UserDashBoardService {
@@ -11,39 +12,37 @@ export class UserDashBoardService {
         private readonly emailService: EmailService
     ) { }
 
-    async updateUserProfile(data: any, id: number) {
-        const user = await this.prismaService.user.findFirst({
-            where: { id }
-        })
+    async getUser(id: number) {
+        const user = await this.prismaService.user.findFirst({ where: { id } })
         if (user === null) {
             throw new HttpException("User not found", HttpStatus.NOT_FOUND)
         }
-        if (data?.state) {
+        delete user['password']
+        return user
+    }
 
+
+    async updateUserProfile(data: any, id: number) {
+        const user = await this.prismaService.user.findFirst({ where: { id } });
+
+        if (user === null) {
+            throw new HttpException("User not found", HttpStatus.NOT_FOUND)
         }
         const req = await this.prismaService.user.update({
             where: { id: user.id },
-            data
+            data: data
         })
         if (req === null) {
             throw new HttpException("User update failed", HttpStatus.NOT_FOUND)
         }
-        // if (data.city) {
-        //     try {
-        //         const advisor = await this.prismaService.advisor.findFirst({ where: { assign_city: { contains: req.city, mode: "insensitive" } } })
-        //         advisor && await this.prismaService.user.update({ where: { id: req.id }, data: { advisor_id: advisor?.id } })
-        //     } catch (err) {
-        //         return "Advisor isn't assign for you"
-        //     }
-        // }
         delete req['password']
         return req
     }
 
+
+
     async updateUserPassword(data: UpdatePasswordDto, id: number) {
-        const user = await this.prismaService.user.findFirst({
-            where: { id }
-        })
+        const user = await this.prismaService.user.findFirst({ where: { id } })
         if (user === null) {
             throw new HttpException("User not found", HttpStatus.NOT_FOUND)
         }
@@ -54,9 +53,7 @@ export class UserDashBoardService {
         const hash = await bcrypt.hash(data?.new_password?.toString(), 10)
         const req = await this.prismaService.user.update({
             where: { id: user.id },
-            data: {
-                password: hash
-            }
+            data: { password: hash }
         })
         if (req === null) {
             throw new HttpException("User update failed", HttpStatus.NOT_FOUND)
@@ -65,14 +62,7 @@ export class UserDashBoardService {
         return req
     }
 
-    async getUser(id: number) {
-        const user = await this.prismaService.user.findFirst({ where: { id } })
-        if (user === null) {
-            throw new HttpException("User not found", HttpStatus.NOT_FOUND)
-        }
-        delete user['password']
-        return user
-    }
+
 
     // async recommendedCommunities(id: number) {
     //     const user = await this.prismaService.user.findFirst({
