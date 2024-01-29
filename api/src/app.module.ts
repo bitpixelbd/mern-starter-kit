@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { BullModule } from '@nestjs/bull';
+import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -41,6 +42,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AdminModule,
     EmailModule,
+    AdminAuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

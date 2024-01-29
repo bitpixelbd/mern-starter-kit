@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import * as bcryptjs from 'bcryptjs';
+import * as crypto from 'crypto';
+import { JwtSignService } from 'src/user-auth/jwt.sign.service';
+
 import EmailService from '../email/email.service';
 import { PrismaService } from '../prisma/prisma.service';
-import * as crypto from 'crypto';
-import * as bcryptjs from 'bcryptjs'
-import { JwtService } from '@nestjs/jwt';
-import { JwtSignService } from './jwt.sign.service';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AdminPasswordResetService {
+export class AdminAuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
@@ -22,21 +23,13 @@ export class AdminPasswordResetService {
   * if email not found in DB, do nothing
   * */
   async sendPasswordResetCodeToEmail(email: string): Promise<any> {
-    const user = await this.prismaService.adminUser.findFirst({
-      where: {
-        email
-      }
-    });
+    const user = await this.prismaService.adminUser.findFirst({ where: { email } });
 
     if (user === null) return true;
 
     const otp_code = `${crypto.randomInt(100000, 999999)}`;
 
-    const reset = await this.prismaService.adminPasswordReset.findFirst({
-      where: {
-        email
-      }
-    });
+    const reset = await this.prismaService.adminPasswordReset.findFirst({ where: { email } });
 
     if (reset) {
       await this.prismaService.adminPasswordReset.update({
@@ -59,7 +52,7 @@ export class AdminPasswordResetService {
       subject: 'Forgot password',
       text,
     });
-    /*if (process.env.NODE_ENV !== 'development') {
+    /* if (process.env.NODE_ENV !== 'development') {
 
     }*/
 
@@ -74,6 +67,7 @@ export class AdminPasswordResetService {
         reset_code
       }
     });
+
     if (reset === null) {
       return false;
     }
@@ -82,16 +76,10 @@ export class AdminPasswordResetService {
     if (reset) {
       const hash = bcryptjs.hashSync(new_password.toString(), 10);
       await this.prismaService.adminUser.update({
-        where: {
-          email
-        },
-        data: {
-          password: hash
-        }
+        where: { email },
+        data: { password: hash }
       });
-      await this.prismaService.adminPasswordReset.delete({
-        where: { id: reset.id }
-      });
+      await this.prismaService.adminPasswordReset.delete({ where: { id: reset.id } });
 
       return true;
     }
@@ -99,4 +87,3 @@ export class AdminPasswordResetService {
     return false;
   }
 }
-
