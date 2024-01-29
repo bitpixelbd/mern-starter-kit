@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3c730991-7c39-4b27-bbd0-157c08eb1b5f",
+		"_postman_id": "84416bd8-0c2f-4b1d-ab5f-0b5f5a54109b",
 		"name": "MERN Starter",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "594866"
+		"_exporter_id": "30370756"
 	},
 	"item": [
 		{
@@ -29,10 +29,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"otp\": \"123\"\r\n}"
+							"raw": "{\r\n    \"phone\": \"123456789\",\r\n    \"otp\": \"123456\"\r\n}"
 						},
 						"url": {
-							"raw": "{{HOST}}/api/v1/auth/login",
+							"raw": "{{HOST}}/api/v1/auth/otp-login",
 							"host": [
 								"{{HOST}}"
 							],
@@ -40,7 +40,7 @@
 								"api",
 								"v1",
 								"auth",
-								"login"
+								"otp-login"
 							]
 						}
 					},
@@ -215,7 +215,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjoxLCJzdWIiOjEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NzM2MDMwfQ.b_dT1RhUJ_jMj2GINr5yelTa0T-So0iPUnPSDjhj2do",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjEwLCJzdWIiOjEwLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNjUxNjcxNX0.DgReF4on-dm0urI_Y8soMxL_cjMvI-oHgS1MroSVUyA",
 									"type": "string"
 								}
 							]
@@ -229,16 +229,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{HOST}}/api/v1/user/dashboard/profile",
+							"raw": "{{HOST}}/api/v1/user-profile/user",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"dashboard",
-								"profile"
+								"user-profile",
+								"user"
 							]
 						}
 					},
@@ -252,7 +251,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwiaWQiOjIsInN1YiI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTkyNDYzNTV9.46pZljTvqUWaekVYVfhWqIXOlFhsGWxpbQWBsnJDpaQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjEwLCJzdWIiOjEwLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNjUxNjcxNX0.DgReF4on-dm0urI_Y8soMxL_cjMvI-oHgS1MroSVUyA",
 									"type": "string"
 								}
 							]
@@ -267,7 +266,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"new_password\":\"123456\",\r\n    \"current_password\":\"mehedi\"\r\n}",
+							"raw": "{\r\n    \"new_password\":\"123456\",\r\n    \"current_password\":\"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -275,17 +274,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/v1/user/dashboard/update/password",
+							"raw": "{{HOST}}/api/v1/user-profile/update-password",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"dashboard",
-								"update",
-								"password"
+								"user-profile",
+								"update-password"
 							]
 						}
 					},
@@ -507,7 +504,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1kbWVoZWRpaGFzYW4yMzYwQGdtYWlsLmNvbSIsImlkIjo1LCJzdWIiOjUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjk4NjUyODE3fQ.qG-fJ-_Eqe9z5zRfUzJe-tp38z1kzDgc2gLhZDIFnTU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjEwLCJzdWIiOjEwLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNjUxNjcxNX0.DgReF4on-dm0urI_Y8soMxL_cjMvI-oHgS1MroSVUyA",
 									"type": "string"
 								}
 							]
@@ -522,7 +519,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"Mehedi Hasan\"\r\n}",
+							"raw": "\r\n{\r\n    \"email\": \"bangla@mail.com\",\r\n    \"name\": \"ami bangladeshi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -530,17 +527,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/v1/user/dashboard/update/profile",
+							"raw": "{{HOST}}/api/v1/user-profile/update",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"dashboard",
-								"update",
-								"profile"
+								"user-profile",
+								"update"
 							]
 						}
 					},
@@ -645,7 +640,7 @@
 		},
 		{
 			"key": "TOKEN",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjEwLCJzdWIiOjEwLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNjUxNjcxNX0.DgReF4on-dm0urI_Y8soMxL_cjMvI-oHgS1MroSVUyA",
 			"type": "default"
 		},
 		{
