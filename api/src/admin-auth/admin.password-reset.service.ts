@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 import * as bcryptjs from 'bcryptjs';
 import * as crypto from 'crypto';
+import { Role } from 'src/user-auth/dto/role.enum';
 import { JwtSignService } from 'src/user-auth/jwt.sign.service';
 
 import EmailService from '../email/email.service';
@@ -82,4 +84,27 @@ export class AdminAuthService {
 
     return false;
   }
+
+  async loginAdminUser(user: User): Promise<any> {
+    const access_token = this.jwtSignService.signJwt(user, Role.Admin);
+    return {
+      ...user,
+      access_token
+    };
+  }
+
+  async createAdminUser(email: string, first_name: string, last_name: string, password: string): Promise<any> {
+    const hash = await bcryptjs.hashSync(password.toString(), 10);
+    const user = await this.prismaService.adminUser.create({
+      data: {
+        email,
+        first_name,
+        last_name,
+        password: hash
+      }
+    });
+    return user;
+  }
+
+
 }

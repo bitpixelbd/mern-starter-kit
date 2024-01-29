@@ -2,14 +2,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
 // import { JwtSignService } from "src/auth/jwt.sign.service";
 import EmailService from '../email/email.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { OtpLoginDto } from './dto/loginUser.dto';
-import { Role } from './dto/role.enum';
 import { JwtSignService } from './jwt.sign.service';
 
 @Injectable()
@@ -131,27 +129,4 @@ export class LoginService {
       }
     }
   }
-
-
-  async loginAdminUser(user: User): Promise<any> {
-    const access_token = this.jwtSignService.signJwt(user, Role.Admin);
-    return {
-      ...user,
-      access_token
-    };
-  }
-
-  async createAdminUser(email: string, first_name: string, last_name: string, password: string): Promise<any> {
-    const hash = bcrypt.hashSync(password.toString(), 10);
-    const user = await this.prismaService.adminUser.create({
-      data: {
-        email,
-        first_name,
-        last_name,
-        password: hash
-      }
-    });
-    return user;
-  }
-
 }

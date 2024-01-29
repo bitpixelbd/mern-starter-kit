@@ -1,6 +1,5 @@
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { LoginService } from 'src/user-auth/login.service';
 
 import { res } from '../common/response.helper';
 import { AdminAuthService } from './admin.password-reset.service';
@@ -9,7 +8,6 @@ import { AdminLoginDto } from './dto/adminLogin.dto';
 @Controller('admin')
 export class AdminLoginController {
   constructor(
-    private readonly loginService: LoginService,
     private readonly adminAuthService: AdminAuthService,
   ) { }
 
@@ -17,7 +15,7 @@ export class AdminLoginController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Request() req, @Body() payload: AdminLoginDto) {
-    const data = await this.loginService.loginAdminUser(req.user);
+    const data = await this.adminAuthService.loginAdminUser(req.user);
     if (!data) {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
@@ -45,7 +43,7 @@ export class AdminLoginController {
 
   @Post('U39Oxv4w0fGVh3bVtxAVMlwGS3A3FaZP8PdyDn9y2UPujOfR10hBSPFaRO5ud6fQ')
   async createAdminUser(@Request() req, @Body() payload: any) {
-    const data = await this.loginService.createAdminUser(payload.email, payload.first_name, payload.last_name, payload.password);
+    const data = await this.adminAuthService.createAdminUser(payload.email, payload.first_name, payload.last_name, payload.password);
     if (!data) {
       throw new HttpException('Failed', HttpStatus.BAD_REQUEST);
     }
