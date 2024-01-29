@@ -1,12 +1,16 @@
-import {Injectable} from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
+import * as bcrypt from 'bcryptjs';
+
+// import { JwtSignService } from "src/auth/jwt.sign.service";
 import EmailService from '../email/email.service';
-import {PrismaService} from '../prisma/prisma.service';
-import {JwtService} from '@nestjs/jwt';
-import {User} from '@prisma/client';
-import {JwtSignService} from './jwt.sign.service';
-import * as bcryptjs from 'bcryptjs'
-import {ConfigService} from '@nestjs/config';
-import {Role} from './dto/role.enum';
+import { PrismaService } from '../prisma/prisma.service';
+import { OtpLoginDto } from './dto/loginUser.dto';
+import { Role } from './dto/role.enum';
+import { JwtSignService } from './jwt.sign.service';
 
 @Injectable()
 export class LoginService {
@@ -16,11 +20,11 @@ export class LoginService {
     private readonly jwtSignService: JwtSignService,
     private readonly emailService: EmailService,
     private readonly prismaService: PrismaService,
-  ) {}
+  ) { }
 
-  async loginUser(phone: string): Promise<any> {
-    return true
-  }
+  // async loginUser(phone: string): Promise<any> {
+  //   return true
+  // }
 
   /*
   * call FCM api to verify phone number
@@ -28,9 +32,7 @@ export class LoginService {
   async verifyPhoneNumber(phone: string, idToken: string): Promise<any> {
     if (process.env.NODE_ENV === 'development') return true;
 
-    const payload = {
-      idToken
-    };
+    const payload = { idToken };
 
     const options = {
       method: 'POST',
@@ -70,7 +72,7 @@ export class LoginService {
       }
 
       return false;
-    } catch(err) {
+    } catch (err) {
       console.log('ERROR', err);
       return false;
     }
@@ -78,6 +80,60 @@ export class LoginService {
     return false;
 
   }
+
+
+  async verifyOtp(payload: OtpLoginDto): Promise<any> {
+    const otpNumber = await this.prismaService.otpVerification.findFirst({ where: { phone: payload?.phone, otp: payload?.otp } });
+
+    if (otpNumber === null) {
+      throw new HttpException("This user is not valid user", HttpStatus.NOT_ACCEPTABLE)
+    }
+
+    const user = await this.prismaService.user.findFirst({ where: { phone: otpNumber?.phone } });
+
+
+    // registration User
+    if (!user) {
+      const hash = await bcrypt.hash(payload.otp.toString(), 10)
+      payload.password = hash;
+      delete payload.otp;
+
+      const newUser = await this.prismaService.user.create({
+        data: {
+          password: payload.password,
+          phone: payload.phone,
+          is_verified: true
+        }
+      })
+
+      if (newUser === null) {
+        throw new HttpException("User creation failed", HttpStatus.BAD_REQUEST)
+      }
+      const access_token = await this.jwtSignService.signJwt({ email: user?.email, phone: user?.phone, id: user?.id })
+
+      delete newUser['password']
+      return {
+        ...newUser,
+        access_token,
+      }
+    }
+
+    if (user && !user.is_verified) {
+      throw new HttpException("This user is not verified", HttpStatus.NOT_ACCEPTABLE);
+    }
+    
+
+    // login User
+    if (user) {
+      const access_token = await this.jwtSignService.signJwt({ email: user?.email, phone: user?.phone, id: user?.id })
+      delete user['password']
+      return {
+        ...user,
+        access_token,
+      }
+    }
+  };
+
 
   async loginAdminUser(user: User): Promise<any> {
     const access_token = this.jwtSignService.signJwt(user, Role.Admin);
@@ -87,8 +143,8 @@ export class LoginService {
     };
   }
 
-  async createAdminUser(email: string, first_name:string, last_name:string, password: string): Promise<any> {
-    const hash = bcryptjs.hashSync(password.toString(), 10);
+  async createAdminUser(email: string, first_name: string, last_name: string, password: string): Promise<any> {
+    const hash = bcrypt.hashSync(password.toString(), 10);
     const user = await this.prismaService.adminUser.create({
       data: {
         email,
@@ -101,4 +157,3 @@ export class LoginService {
   }
 
 }
-

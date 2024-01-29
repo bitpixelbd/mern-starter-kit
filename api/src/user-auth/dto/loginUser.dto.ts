@@ -11,3 +11,17 @@ export class LoginUserDto {
 
   push_token?: string;
 }
+
+export class OtpLoginDto {
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+
+  @IsNotEmpty()
+  @IsString()
+  otp: string;
+
+  password?: string;
+
+  push_token?: string;
+}

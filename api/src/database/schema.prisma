@@ -151,8 +151,8 @@ model Product {
 
 model User {
   id            Int       @id @default(autoincrement())
-  name          String
-  email         String    @unique @db.VarChar(200)
+  name          String?
+  email         String?   @unique @db.VarChar(200)
   phone         String?   @unique @db.VarChar(200)
   password      String
   status        String?   @db.VarChar(200)
