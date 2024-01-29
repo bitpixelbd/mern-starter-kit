@@ -95,33 +95,31 @@ export class LoginService {
     // registration User
     if (!user) {
       const hash = await bcrypt.hash(payload.otp.toString(), 10)
-      // payload.password = hash;
-      // delete payload.otp;
 
-      const newUser = await this.prismaService.user.create({
-        data: {
-          password: hash,
-          phone: payload.phone,
-          is_verified: true
+      try {
+        const newUser = await this.prismaService.user.create({
+          data: {
+            password: hash,
+            phone: payload.phone,
+            is_verified: true
+          }
+        });
+        const access_token = await this.jwtSignService.signJwt({ email: user?.email, phone: user?.phone, id: user?.id })
+
+        delete newUser['password']
+        return {
+          ...newUser,
+          access_token,
         }
-      })
-
-      // if (newUser === null) {
-      //   throw new HttpException("User creation failed", HttpStatus.BAD_REQUEST)
-      // }
-      const access_token = await this.jwtSignService.signJwt({ email: user?.email, phone: user?.phone, id: user?.id })
-
-      delete newUser['password']
-      return {
-        ...newUser,
-        access_token,
+      } catch (error) {
+        throw new HttpException("User creation failed", HttpStatus.BAD_REQUEST)
       }
+
     }
 
     if (user && !user.is_verified) {
       throw new HttpException("This user is not verified", HttpStatus.NOT_ACCEPTABLE);
     }
-
 
     // login User
     if (user) {
