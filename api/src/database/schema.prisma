@@ -149,22 +149,174 @@ model Product {
   @@map(name: "products")
 }
 
-model User {
-  id            Int       @id @default(autoincrement())
-  name          String?
-  email         String?   @unique @db.VarChar(200)
-  phone         String?   @unique @db.VarChar(200)
-  password      String
-  status        String?   @db.VarChar(200)
-  profile_image String?
-  private_notes String?
-  is_verified   Boolean   @default(false)
-  address       String?
-  description   String?
-  Address       Address[]
 
+
+
+
+
+
+
+
+
+
+
+
+model User {
+  id                      Int                     @id @default(autoincrement())
+  first_name              String?
+  last_name               String?
+  date_of_birth           DateTime?
+  gender                  String?
+  job                     String?
+  lang                    String?
+  lat                     String?
+  email                   String?                 @unique @db.VarChar(200)
+  phone                   String?                 @unique @db.VarChar(200)
+  password                String
+  status                  String?                 @db.VarChar(200)
+  profile_image           String?
+  private_notes           String?
+  is_verified             Boolean                 @default(false)
+  address                 String?
+  description             String?
+  Address                 Address[]
+  association_subscribes  AssociationSubscribers[]
+  VerificationsDoc        UserVerifications[]
+  EventParticipation      Participants[]
+  EventShared             EventShare[]
   @@map(name: "users")
 }
+
+model Association {
+  id           Int                     @id @default(autoincrement())
+  phone        String                  @unique
+  title        String
+  subTitle     String
+  desc         String
+  city         String
+  country      String
+  lat          String
+  lang         String
+  post         String
+  image        String
+  coverImg     String
+  created_at   DateTime                @default(now())
+  updated_at   DateTime                @updatedAt
+  Events       Events[]
+  Subscribers  AssociationSubscribers[]
+
+  @@map(name: "associations")
+}
+
+model AssociationSubscribers {
+  id               Int            @id @default(autoincrement())
+  subscriber_id    Int 
+  association_id   Int 
+  Subscriber       User           @relation(fields:[subscriber_id], references:[id])
+  Association      Association    @relation(fields:[association_id], references:[id])
+
+  @@map(name: "association_subscribers")
+}
+
+model EventShare {
+  id               Int            @id @default(autoincrement())
+  user_id      Int 
+  event_id     Int
+  User         User               @relation(fields: [user_id], references: [id])
+  Event        Events             @relation(fields: [event_id], references: [id])
+
+  @@map(name: "event_shares")
+
+}
+
+
+
+model Events {
+  id          Int       @id @default(autoincrement())
+  title       String    @map("title")
+  subTitle    String    @map("sub_title")
+  desc        String
+  city        String
+  country     String
+  lat         String
+  lang        String
+  post        String
+  image       String
+  association_id  Int
+  startDate   DateTime  @map("start_date")
+  endDate     DateTime  @map("end_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  Participators Participants[]
+  Association  Association  @relation(fields: [association_id], references: [id])
+  Categories   EventCategory[]
+  Shared       EventShare[]
+
+  @@map(name: "events")
+}
+
+model Categories {
+  id      Int     @id @default(autoincrement())
+  name    String
+  Events  EventCategory[]
+
+  @@map(name: "categories")
+}
+
+model EventCategory {
+  id              Int         @id @default(autoincrement())
+  event_id        Int 
+  category_id     Int 
+  Event           Events      @relation(fields: [event_id], references: [id])
+  Category        Categories  @relation(fields: [category_id], references: [id])
+
+  @@map(name: "event_categories")
+
+}
+
+model Participants {
+  id          Int       @id @default(autoincrement())
+  isCanceled  Boolean   @map("IsCanceled")
+  eventId     Int
+  user_id     Int
+  Event       Events    @relation(fields: [eventId], references: [id])
+  User        User      @relation (fields: [user_id], references: [id])
+}
+
+
+
+model UserVerifications {
+  id           Int                 @id @default(autoincrement())
+  type         VerificationsType?
+  card_number  String?
+  user_id      Int?
+  User         User?               @relation(fields: [user_id], references: [id])
+
+  @@map(name: "user_verifications")
+}
+
+enum VerificationsType {
+  NID
+  DRIVING
+  PASSPORT
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 model TestUser {
   id       Int     @id @default(autoincrement())
