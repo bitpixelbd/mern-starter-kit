@@ -24,7 +24,7 @@ export class UserDashBoardService {
 
     async updateUserProfile(data: any, id: number) {
         const user = await this.prismaService.user.findFirst({ where: { id } });
-
+        console.log(user)
         if (user === null) {
             throw new HttpException("User not found", HttpStatus.NOT_FOUND)
         }

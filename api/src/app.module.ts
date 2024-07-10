@@ -16,6 +16,8 @@ import { EmailModule } from './email/email.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserAuthModule } from './user-auth/user-auth.module';
 import { UsersModule } from './users/users.module';
+import { AssociationModule } from './association/association.module';
+import { AssociationAuthModule } from './association-auth/association-auth.module';
 
 @Module({
   imports: [
@@ -42,7 +44,9 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AdminModule,
     EmailModule,
-    AdminAuthModule
+    AdminAuthModule,
+    AssociationModule,
+    AssociationAuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

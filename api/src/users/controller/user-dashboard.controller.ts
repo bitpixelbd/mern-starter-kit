@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Body, Controller, Get, Patch, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Patch, Post, Req, UseGuards } from "@nestjs/common";
 import { res } from "src/common/response.helper";
 import { JwtAuthGuard } from "src/user-auth/jwt/jwt-auth.guard";
 

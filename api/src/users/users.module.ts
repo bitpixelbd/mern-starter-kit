@@ -13,13 +13,14 @@ import { UserDashBoardController } from './controller/user-dashboard.controller'
 import { UserDashBoardService } from './services/user-dashboard.service';
 
 
+
 @Module({
   providers: [
     JwtSignService,
     SmsService,
     EmailService,
     UserDashBoardService,
-
+    // AssociationService
   ],
   exports: [],
   imports: [
@@ -41,6 +42,7 @@ import { UserDashBoardService } from './services/user-dashboard.service';
   ],
   controllers: [
     UserDashBoardController,
+    // AssociationController
   ]
 })
 
