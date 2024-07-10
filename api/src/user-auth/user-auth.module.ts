@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 import { JwtSignService } from './jwt.sign.service';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { LocalAdminStrategy } from "./local-admin.auth";
-// import { AuthController } from './auth.controller';
+import { AuthController } from './auth.controller';
 // import { RegisterController } from './register.controller';
 import { LoginController } from './login.controller';
 // import {VerifyEmailController} from './verify-email.controller'
@@ -52,7 +52,7 @@ import { OtpService } from './otp.service';
     JwtSignService
   ],
   controllers: [
-    // AuthController,
+    AuthController,
     // VerifyEmailController,
     // RegisterController,
     LoginController,  

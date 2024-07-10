@@ -172,7 +172,7 @@ model User {
   lat                     String?
   email                   String?                 @unique @db.VarChar(200)
   phone                   String?                 @unique @db.VarChar(200)
-  password                String
+  password                String?
   status                  String?                 @db.VarChar(200)
   profile_image           String?
   private_notes           String?

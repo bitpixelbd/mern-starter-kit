@@ -28,9 +28,6 @@ export class LoginController {
   @Post('otp-login')
   async otpLogin(@Request() req, @Body() payload: OtpLoginDto) {
     const isValid = await this.loginService.verifyOtp(payload);
-
-
-
     const data = await this.loginService.verifyOtp(payload);
     if (!data) {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);

@@ -1,4 +1,5 @@
 export class VerifyOtpDto {
-  email: string;
+  email?: string;
+  phone?:string;
   otp: string;
 }
