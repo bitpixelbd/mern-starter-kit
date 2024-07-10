@@ -201,7 +201,7 @@ model Association {
   image        String?
   coverImg     String?
   created_at   DateTime                @default(now())
-  updated_at   DateTime                @updatedAt
+  updated_at   DateTime                @updatedAt @default(now())
   Events       Events[]
   Subscribers  AssociationSubscribers[]
 
