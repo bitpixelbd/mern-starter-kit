@@ -5,6 +5,7 @@ import EmailService from '../../email/email.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { UpdatePasswordDto } from '../dto/updatePasswordDto';
 import { AddEventParticipantDto } from '../dto/add-event-participation.dto';
+import { ShareEventDto } from '../dto/add-share-event.dto';
 
 @Injectable()
 export class UserDashBoardEventService {
@@ -48,5 +49,47 @@ export class UserDashBoardEventService {
         }catch(err){
             throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }   
+    }
+
+
+    async shareEvent(userId: number, shareEventDto: ShareEventDto) {
+        try{
+            const { eventId } = shareEventDto;
+    
+            // Check if the event exists
+            const event = await this.prisma.events.findUnique({
+            where: { id: eventId },
+            });
+        
+            if (!event) {
+            throw new HttpException(`Event with ID ${eventId} not found`, HttpStatus.CONFLICT);
+            }
+        
+            // Check if the user has already shared the event
+            const existingShare = await this.prisma.eventShare.findFirst({
+            where: {
+                event_id: eventId,
+                user_id: userId,
+            },
+            });
+        
+            if (existingShare) {
+            throw new HttpException(`User has already shared this event`, HttpStatus.CONFLICT);
+            }
+        
+            // Share the event
+            return this.prisma.eventShare.create({
+            data: {
+                event_id: eventId,
+                user_id: userId,
+            },
+            include: {
+                Event: true,
+                User: true
+            }
+            });
+        }catch(err){
+            throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
     }
 }

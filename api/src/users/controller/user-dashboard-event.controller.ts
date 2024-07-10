@@ -8,6 +8,7 @@ import { UpdatePasswordDto } from "../dto/updatePasswordDto";
 import { UserDashBoardService } from "../services/user-dashboard.service";
 import { UserDashBoardEventService } from "../services/user-dashboard-event.service";
 import { AddEventParticipantDto } from "../dto/add-event-participation.dto";
+import { ShareEventDto } from "../dto/add-share-event.dto";
 
 @UseGuards(JwtAuthGuard)
 @Controller('user-profile/event')
@@ -20,5 +21,12 @@ export class UserDashBoardEventController {
       const { id: userId } = req.user;
       const participant = await this.userDashboardEventService.addParticipant(userId, addParticipantDto);
       return res.success(participant, 'Successfully registered');
+    }
+
+    @Post('share')
+    async shareEvent(@Req() req, @Body() shareEventDto: ShareEventDto) {
+      const { id: userId } = req.user;
+      const eventShare = await this.userDashboardEventService.shareEvent(userId, shareEventDto);
+      return res.success(eventShare, 'Event shared successfully');
     }
 }
