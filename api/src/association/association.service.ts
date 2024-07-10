@@ -43,7 +43,8 @@ import { CreateEventDto } from './dtos/createEventDto';
 import { GetEventsDto } from './dtos/getEventByCategoryDTO.dto';
 import { GetPeriodEventsDto } from './dtos/getWeeklyEvent.dto';
 import { GetAssociationsDto } from './dtos/get-all-association-info.dto';
-
+import { EventFilter, GetAssociationEventsDto } from './dtos/get-all-event-of-association.dto';
+import { Prisma } from '@prisma/client';
 @Injectable()
 export class AssociationService {
     constructor(private prisma: PrismaService) {}
@@ -297,6 +298,49 @@ export class AssociationService {
           return association;
         }catch(err){
           throw new HttpException(err.message, HttpStatus.NOT_FOUND)
+        }
+      }
+
+      async getAssociationEvents(query: GetAssociationEventsDto) {
+        try{
+          const { filter, associationId } = query;
+    
+          // Check if the association exists
+          const association = await this.prisma.association.findUnique({
+            where: { id: associationId },
+          });
+      
+          if (!association) {
+            throw new HttpException(`Association with ID ${associationId} not found`, HttpStatus.NOT_FOUND);
+          }
+      
+          const currentDate = new Date();
+          let whereClause: Prisma.EventsWhereInput = { association_id: associationId };
+      
+          if (filter === EventFilter.UPCOMING) {
+            whereClause.startDate = { gt: currentDate };
+          } else if (filter === EventFilter.CANCELED) {
+            whereClause.cancelDate = { not: null };
+          } else if (filter === EventFilter.PAST) {
+            whereClause.endDate = { lt: currentDate };
+          }
+      
+          const orderByClause: Prisma.EventsOrderByWithRelationInput = filter === EventFilter.UPCOMING
+            ? { startDate: 'asc' as Prisma.SortOrder }
+            : filter === EventFilter.CANCELED
+              ? { cancelDate: 'asc' as Prisma.SortOrder }
+              : { endDate: 'desc' as Prisma.SortOrder };
+      
+          const events = await this.prisma.events.findMany({
+            where: whereClause,
+            orderBy: orderByClause,
+          });
+          if (!events.length){
+            throw new HttpException(`Not ${filter} events found!!`, HttpStatus.NOT_FOUND)
+          }
+          return events;
+        }catch(err){
+          throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
       }
 }

@@ -4,6 +4,7 @@ import { GetEventsDto } from './dtos/getEventByCategoryDTO.dto';
 import { res } from 'src/common/response.helper';
 import { GetPeriodEventsDto } from './dtos/getWeeklyEvent.dto';
 import { GetAssociationsDto } from './dtos/get-all-association-info.dto';
+import { GetAssociationEventsDto } from './dtos/get-all-event-of-association.dto';
 
 @Controller('association-public')
 export class AssociationPublicController {
@@ -34,5 +35,11 @@ export class AssociationPublicController {
     async getAssociationById(@Param('id', ParseIntPipe) id: number) {
         const association = await  this.associationService.getAssociationById(id);
         return res.success(association)
+    }
+
+    @Get('association-events')
+    async getAssociationEvents(@Query() query: GetAssociationEventsDto) {
+      const events = await this.associationService.getAssociationEvents(query);
+      return res.success(events)
     }
 }

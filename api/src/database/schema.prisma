@@ -232,28 +232,30 @@ model EventShare {
 
 
 model Events {
-  id          Int       @id @default(autoincrement())
-  title       String?    @map("title")
-  subTitle    String?    @map("sub_title")
-  desc        String?
-  city        String?
-  country     String?
-  lat         String?
-  lang        String?
-  post        String?
-  image       String?
-  association_id  Int
-  startDate   DateTime  @map("start_date")
-  endDate     DateTime  @map("end_date")
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  Participators Participants[]
-  Association  Association  @relation(fields: [association_id], references: [id])
-  Categories   EventCategory[]
-  Shared       EventShare[]
+  id             Int               @id @default(autoincrement())
+  title          String?           @map("title")
+  subTitle       String?           @map("sub_title")
+  desc           String?
+  city           String?
+  country        String?
+  lat            String?
+  lang           String?
+  post           String?
+  image          String?
+  association_id Int
+  startDate      DateTime          @map("start_date")
+  endDate        DateTime          @map("end_date")
+  cancelDate     DateTime?         
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  Participators  Participants[]
+  Association    Association       @relation(fields: [association_id], references: [id])
+  Categories     EventCategory[]
+  Shared         EventShare[]
 
   @@map(name: "events")
 }
+
 
 model Categories {
   id      Int     @id @default(autoincrement())
