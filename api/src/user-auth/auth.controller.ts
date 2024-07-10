@@ -21,5 +21,4 @@ export class AuthController {
       const saveUser = await this.authService.registerUser(payload)
       res.success(saveUser)
   }
-
 }
