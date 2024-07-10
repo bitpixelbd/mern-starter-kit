@@ -7,6 +7,8 @@ import { UpdatePasswordDto } from '../dto/updatePasswordDto';
 import { AddEventParticipantDto } from '../dto/add-event-participation.dto';
 import { ShareEventDto } from '../dto/add-share-event.dto';
 import { SubscribeAssociationDto } from '../dto/subscribe-association.dto';
+import { EventFilterOfUser, GetUserEventsDto } from '../dto/get-logged-in-user-event-details.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserDashBoardEventService {
@@ -134,6 +136,46 @@ export class UserDashBoardEventService {
         }catch(err){
             throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }   
+    }
+
+    async getUserEvents(userId: number, query: GetUserEventsDto) {
+        try{
+            const { filter } = query;
+    
+            const currentDate = new Date();
+            let whereClause: Prisma.EventsWhereInput = {
+            Participators: {
+                some: {
+                user_id: userId,
+                },
+            },
+            };
+        
+            if (filter === EventFilterOfUser.UPCOMING) {
+            whereClause.startDate = { gt: currentDate };
+            } else if (filter === EventFilterOfUser.CANCELED) {
+            whereClause.cancelDate = { not: null };
+            } else if (filter === EventFilterOfUser.PAST) {
+            whereClause.endDate = { lt: currentDate };
+            }
+        
+            const orderByClause: Prisma.EventsOrderByWithRelationInput = filter === EventFilterOfUser.UPCOMING
+            ? { startDate: 'asc' as Prisma.SortOrder }
+            : filter === EventFilterOfUser.CANCELED
+                ? { cancelDate: 'asc' as Prisma.SortOrder }
+                : { endDate: 'desc' as Prisma.SortOrder };
+        
+            const events = await this.prisma.events.findMany({
+            where: whereClause,
+            orderBy: orderByClause,
+            });
+            if (!events.length) {
+                throw new HttpException(`No ${filter} event found`, HttpStatus.NOT_FOUND)
+            }
+            return events;
+        }catch(err){
+            throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
     }
 }
 
