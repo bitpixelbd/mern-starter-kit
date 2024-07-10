@@ -41,6 +41,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEventDto } from './dtos/createEventDto';
 import { GetEventsDto } from './dtos/getEventByCategoryDTO.dto';
+import { GetPeriodEventsDto } from './dtos/getWeeklyEvent.dto';
 
 @Injectable()
 export class AssociationService {
@@ -158,5 +159,89 @@ export class AssociationService {
           page,
           limit,
         };
+      }
+
+     
+    
+      private getStartOfDay(date: Date): Date {
+        date.setHours(0, 0, 0, 0);
+        return date;
+      }
+    
+      private getEndOfDay(date: Date): Date {
+        date.setHours(23, 59, 59, 999);
+        return date;
+      }
+    
+      async getPeriodEvents(query: GetPeriodEventsDto) {
+        try{
+          const { city, categoryId, periodDays = 7, page = 1, limit = 10 } = query;
+          const skip = (page - 1) * limit;
+      
+          const currentDate = new Date();
+          const startOfPeriodDate = this.getStartOfDay(new Date());
+          const endOfPeriodDate = this.getEndOfDay(new Date(currentDate.setDate(currentDate.getDate() + periodDays)));
+      
+          const where: any = {
+            startDate: {
+              gte: startOfPeriodDate,
+              lte: endOfPeriodDate,
+            },
+          };
+      
+          if (city) {
+            where.city = city;
+          }
+      
+          if (categoryId) {
+            where.Categories = {
+              some: {
+                category_id: categoryId,
+              },
+            };
+          }
+      
+          const events = await this.prisma.events.findMany({
+            where,
+            include: {
+              Categories: true,
+            },
+            orderBy: {
+              startDate: 'asc',
+            },
+            skip,
+            take: limit,
+          });
+      
+          const total = await this.prisma.events.count({ where });
+      
+          return {
+            events,
+            total,
+            page,
+            limit,
+          };
+        }catch(err){
+          throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+      }
+
+      async getEventById(id: number) {
+       try{
+        const event = await this.prisma.events.findUnique({
+          where: { id },
+          include: {
+            Categories: true,
+          },
+        });
+    
+        if (!event) {
+          throw new HttpException(`Event with ID ${id} not found`, HttpStatus.NOT_FOUND)
+        }
+    
+        return event;
+       }catch(err) {
+        throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+       }
       }
 }
