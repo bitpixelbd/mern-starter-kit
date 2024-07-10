@@ -42,6 +42,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEventDto } from './dtos/createEventDto';
 import { GetEventsDto } from './dtos/getEventByCategoryDTO.dto';
 import { GetPeriodEventsDto } from './dtos/getWeeklyEvent.dto';
+import { GetAssociationsDto } from './dtos/get-all-association-info.dto';
 
 @Injectable()
 export class AssociationService {
@@ -254,5 +255,48 @@ export class AssociationService {
        }catch(err) {
         throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
        }
+      }
+
+      async getAllAssociations(query: GetAssociationsDto) {
+        try{
+          const { page = 1, limit = 10 } = query;
+          const skip = (page - 1) * limit;
+      
+          const associations = await this.prisma.association.findMany({
+            skip,
+            take: limit,
+            include: {
+              Events: true,
+              Subscribers: true
+            }
+          });
+      
+          const total = await this.prisma.association.count();
+      
+          return {
+            associations,
+            total,
+            page,
+            limit,
+          };
+        }catch(err) {
+          throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+      }
+
+      async getAssociationById(id: number) {
+        try{
+          const association = await this.prisma.association.findUnique({
+            where: { id },
+          });
+      
+          if (!association) {
+            throw new HttpException(`Association with ID ${id} not found`, HttpStatus.NOT_FOUND)
+          }
+      
+          return association;
+        }catch(err){
+          throw new HttpException(err.message, HttpStatus.NOT_FOUND)
+        }
       }
 }
