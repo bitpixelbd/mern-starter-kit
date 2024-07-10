@@ -232,6 +232,17 @@ export class AssociationService {
           where: { id },
           include: {
             Categories: true,
+            Participators: {
+              include: {
+                User: true
+              }
+            },
+            Association: true,
+            Shared: {
+              include: {
+                User: true
+              }
+            }
           },
         });
     

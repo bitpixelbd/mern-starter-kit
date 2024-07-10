@@ -276,7 +276,7 @@ model EventCategory {
 
 model Participants {
   id          Int       @id @default(autoincrement())
-  isCanceled  Boolean   @map("IsCanceled")
+  isCanceled  Boolean   @default(false)
   eventId     Int
   user_id     Int
   Event       Events    @relation(fields: [eventId], references: [id])

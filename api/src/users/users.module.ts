@@ -11,6 +11,8 @@ import { JwtSignService } from 'src/user-auth/jwt.sign.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { UserDashBoardController } from './controller/user-dashboard.controller';
 import { UserDashBoardService } from './services/user-dashboard.service';
+import { UserDashBoardEventController } from './controller/user-dashboard-event.controller';
+import { UserDashBoardEventService } from './services/user-dashboard-event.service';
 
 
 
@@ -20,6 +22,7 @@ import { UserDashBoardService } from './services/user-dashboard.service';
     SmsService,
     EmailService,
     UserDashBoardService,
+    UserDashBoardEventService
     // AssociationService
   ],
   exports: [],
@@ -42,6 +45,7 @@ import { UserDashBoardService } from './services/user-dashboard.service';
   ],
   controllers: [
     UserDashBoardController,
+    UserDashBoardEventController
     // AssociationController
   ]
 })
