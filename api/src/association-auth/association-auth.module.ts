@@ -15,6 +15,7 @@ import { JwtSignService } from 'src/user-auth/jwt.sign.service';
 import { AuthController } from 'src/user-auth/auth.controller';
 import { LoginController } from 'src/user-auth/login.controller';
 import { OtpController } from 'src/user-auth/otp.controller';
+import { AssociationAuthLoginService } from './login.service';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { OtpController } from 'src/user-auth/otp.controller';
   providers: [AssociationAuthService,  AuthService,
     LoginService,
     OtpService,
+    AssociationAuthLoginService,
     // InfoService,
     // RegisterService,
     JwtStrategy,

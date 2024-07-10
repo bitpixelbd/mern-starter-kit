@@ -62,7 +62,7 @@ export class AuthService {
 
   async registerUser(payload: RegisterUserDto) {
     try {
-      const isPhoneVerified = await this.otpService.getTestUser(payload.phone);
+      const isPhoneVerified = await this.otpService.getTestUser(payload.phone, "user");
       if (!isPhoneVerified) {
         throw new HttpException("Provided Phone number is not verified!!", HttpStatus.NOT_ACCEPTABLE);
       }
@@ -81,7 +81,7 @@ export class AuthService {
         }
       });
       
-      console.log(saveUser);
+
       
       if (!saveUser) {
         throw new HttpException("User saved failed!!", HttpStatus.NOT_ACCEPTABLE);

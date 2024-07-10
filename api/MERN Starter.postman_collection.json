@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "22509671-420e-44ac-808e-d72a3bda6c47",
+		"_postman_id": "b4bc4ded-3e67-4c21-bc57-92d95a0d2b28",
 		"name": "MERN Starter",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30370756"
+		"_exporter_id": "15104401"
 	},
 	"item": [
 		{
@@ -178,34 +178,202 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "registration",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"password\": \"123456\",\r\n    \"is_vendor\":false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Registration",
+							"item": [
+								{
+									"name": "send-otp",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+88017015557770\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/send-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"send-otp"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "registration",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"phone\": \"+88017015557770\",\r\n    \"date_of_birth\": \"2024-07-25\",\r\n    \"gender\":\"male\",\r\n    \"job\": \"sdfsdf\",\r\n    \"profile_image\": \"fsdfsdf\"\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/user/auth/register",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"auth",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Verify-Otp",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"otp\": \"691867\",\r\n    \"phone\": \"+88017015557770\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/verify-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"verify-otp"
+											]
+										}
+									},
+									"response": []
 								}
-							}
+							]
 						},
-						"url": {
-							"raw": "{{HOST}}/api/v1/auth/user/register",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"user",
-								"register"
+						{
+							"name": "Login",
+							"item": [
+								{
+									"name": "Otp-Login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+88017015557770\",\r\n    \"otp\": \"749835\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/otp-login",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"otp-login"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "send-otp-login",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+88017015557770\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/send-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"send-otp"
+											]
+										}
+									},
+									"response": []
+								}
 							]
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "profile-update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"phone\": \"+88017015557770\",\r\n    \"date_of_birth\": \"2024-07-25T00:00:00.000Z\",\r\n    \"gender\":\"male\",\r\n    \"job\": \"sdfsdf\",\r\n    \"profile_image\": \"fsdfsdf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/user-profile/update",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user-profile",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Get User",
@@ -336,6 +504,179 @@
 			]
 		},
 		{
+			"name": "Association",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Registration",
+							"item": [
+								{
+									"name": "sent-otp",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+8801521427881\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/send-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"send-otp"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "verify-otp",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+8801521427881\",\r\n    \"otp\": \"701069\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/association-auth/verify-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"association-auth",
+												"verify-otp"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "register",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+8801521427881\",\r\n    \"title\": \"Asscociation One\",\r\n    \"subTitle\": \"Association Sub Title\",\r\n    \"desc\": \"This is description of Association\",\r\n    \"city\": \"London\",\r\n    \"country\": \"England\",\r\n    \"lat\": \"25\",\r\n    \"lang\": \"52\",\r\n    \"post\": \"hello\",\r\n    \"image\": \"this will be image url\",\r\n    \"coverImg\": \"this will be cover image of Asscociation\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/association-auth/register",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"association-auth",
+												"register"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Login",
+							"item": [
+								{
+									"name": "Sent-Otp",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+8801521427881\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/auth/send-otp",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"send-otp"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Otp-Login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"phone\": \"+8801521427881\",\r\n    \"otp\": \"808209\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/v1/association-auth/otp-login",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"association-auth",
+												"otp-login"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "upload image",
 			"request": {
 				"method": "POST",
@@ -432,7 +773,7 @@
 		},
 		{
 			"key": "TOKEN",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjEwLCJzdWIiOjEwLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNjUxNjcxNX0.DgReF4on-dm0urI_Y8soMxL_cjMvI-oHgS1MroSVUyA",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiaWQiOjcsInN1YiI6Nywicm9sZSI6InVzZXIiLCJpYXQiOjE3MjA2MTAxODN9.cc-dNVBNaOrg9Je7TgyqcvglbGmZRISFO0i0hgI-8pI",
 			"type": "default"
 		},
 		{

@@ -51,7 +51,7 @@ export class OtpService {
         data: {
           phone: payload.phone,
           email: payload.email,
-          name: "test"
+          name: "user"
         }
       })
       return {testUser}
@@ -59,9 +59,9 @@ export class OtpService {
       throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
-  async getTestUser (phone: string) {
+  async getTestUser (phone: string, name:string) {
     const testUser = await this.prismaService.testUser.findFirst(
-    { where: { phone }});
+    { where: { phone, name }});
 
 
     return testUser
