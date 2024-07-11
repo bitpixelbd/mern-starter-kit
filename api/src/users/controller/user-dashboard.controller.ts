@@ -6,12 +6,15 @@ import { JwtAuthGuard } from "src/user-auth/jwt/jwt-auth.guard";
 
 import { UpdatePasswordDto } from "../dto/updatePasswordDto";
 import { UserDashBoardService } from "../services/user-dashboard.service";
+import { UserDashboardNotificationService } from "../services/user-dashboard-notification.service";
+import { MarkNotificationsReadDto } from "../dto/mark-notification-read.dto";
 
 @UseGuards(JwtAuthGuard)
 @Controller('user-profile')
 export class UserDashBoardController {
     constructor(
-        private readonly userDashboardService: UserDashBoardService
+        private readonly userDashboardService: UserDashBoardService,
+        private readonly notificationService: UserDashboardNotificationService
     ) { }
     @Get('user')
     async recommendedCommunities(@Req() req) {
@@ -32,5 +35,19 @@ export class UserDashBoardController {
         const { id } = req.user
         const response = await this.userDashboardService.updateUserPassword(data, Number(id))
         return res.success(response)
+    }
+
+    @Get('notifications')
+    async getUserNotifications(@Req() req) {
+      const { id: userId } = req.user;
+      const notifications = await this.notificationService.getUserNotifications(userId);
+      return res.success(notifications, 'User notifications retrieved successfully');
+    }
+  
+    @Post('notifications/mark-read')
+    async markNotificationsAsRead(@Req() req, @Body() markNotificationsReadDto: MarkNotificationsReadDto) {
+      const { id: userId } = req.user;
+      const result = await this.notificationService.markNotificationsAsRead(userId, markNotificationsReadDto);
+      return res.success(result, 'Notifications marked as read successfully');
     }
 }

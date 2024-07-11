@@ -13,6 +13,7 @@ import { UserDashBoardController } from './controller/user-dashboard.controller'
 import { UserDashBoardService } from './services/user-dashboard.service';
 import { UserDashBoardEventController } from './controller/user-dashboard-event.controller';
 import { UserDashBoardEventService } from './services/user-dashboard-event.service';
+import { UserDashboardNotificationService } from './services/user-dashboard-notification.service';
 
 
 
@@ -22,7 +23,8 @@ import { UserDashBoardEventService } from './services/user-dashboard-event.servi
     SmsService,
     EmailService,
     UserDashBoardService,
-    UserDashBoardEventService
+    UserDashBoardEventService,
+    UserDashboardNotificationService
     // AssociationService
   ],
   exports: [],

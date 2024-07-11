@@ -189,8 +189,9 @@ export class AssociationService {
               gte: startOfPeriodDate,
               lte: endOfPeriodDate,
             },
+            cancelDate:null
           };
-      
+          
           if (city) {
             where.city = city;
           }

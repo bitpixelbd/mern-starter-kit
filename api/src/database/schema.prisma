@@ -184,6 +184,8 @@ model User {
   VerificationsDoc        UserVerifications[]
   EventParticipation      Participants[]
   EventShared             EventShare[]
+  OwnNotification         Notification[]           @relation("OwnNotifications")
+  JoinerNotification      Notification[]           @relation("JoinerNotifications")
   @@map(name: "users")
 }
 
@@ -204,7 +206,7 @@ model Association {
   updated_at   DateTime                @updatedAt @default(now())
   Events       Events[]
   Subscribers  AssociationSubscribers[]
-
+  AssociationNotification Notification[]
   @@map(name: "associations")
 }
 
@@ -212,8 +214,8 @@ model AssociationSubscribers {
   id               Int            @id @default(autoincrement())
   subscriber_id    Int 
   association_id   Int 
-  Subscriber       User           @relation(fields:[subscriber_id], references:[id])
-  Association      Association    @relation(fields:[association_id], references:[id])
+  Subscriber       User           @relation(fields:[subscriber_id], references:[id], onDelete: Cascade)
+  Association      Association    @relation(fields:[association_id], references:[id], onDelete: Cascade)
 
   @@map(name: "association_subscribers")
 }
@@ -222,8 +224,8 @@ model EventShare {
   id               Int            @id @default(autoincrement())
   user_id      Int 
   event_id     Int
-  User         User               @relation(fields: [user_id], references: [id])
-  Event        Events             @relation(fields: [event_id], references: [id])
+  User         User               @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  Event        Events             @relation(fields: [event_id], references: [id], onDelete: Cascade)
 
   @@map(name: "event_shares")
 
@@ -249,13 +251,43 @@ model Events {
   createdAt      DateTime          @default(now())
   updatedAt      DateTime          @updatedAt
   Participators  Participants[]
-  Association    Association       @relation(fields: [association_id], references: [id])
+  Association    Association       @relation(fields: [association_id], references: [id], onDelete: Cascade)
   Categories     EventCategory[]
   Shared         EventShare[]
+  EventNotifications Notification[]
 
   @@map(name: "events")
 }
 
+
+model Notification {
+  id            Int              @id @default(autoincrement())
+  owner_id       Int?
+  icon          String?
+  type          NotificationType @default(Simple)
+  event_id      Int?
+  association_id Int?
+  joiner_id     Int?
+  text          String?
+  textFormatted Json?
+  isRead        Boolean          @default(false)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime?        @updatedAt
+  Owner          User?            @relation(fields: [owner_id], references: [id], onDelete: Cascade, name: "OwnNotifications")
+  Joiner        User?            @relation(fields: [joiner_id], references: [id], onDelete: Cascade, name: "JoinerNotifications")
+  Event         Events?          @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  Association   Association?     @relation(fields: [association_id], references: [id], onDelete: Cascade)
+
+  @@map(name: "notifications")
+}
+
+enum NotificationType {
+  Simple
+  EventStartAlert 
+  AssociationJoining
+  EventJoining
+  NewEventAdd
+}
 
 model Categories {
   id      Int     @id @default(autoincrement())
@@ -270,7 +302,7 @@ model EventCategory {
   event_id        Int 
   category_id     Int 
   Event           Events      @relation(fields: [event_id], references: [id])
-  Category        Categories  @relation(fields: [category_id], references: [id])
+  Category        Categories  @relation(fields: [category_id], references: [id], onDelete: Cascade)
 
   @@map(name: "event_categories")
 
