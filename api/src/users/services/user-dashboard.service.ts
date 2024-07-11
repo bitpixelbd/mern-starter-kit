@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import EmailService from '../../email/email.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { UpdatePasswordDto } from '../dto/updatePasswordDto';
+import { CreateUpdateVerificationDto } from '../dto/add-update-verification-data.dto';
 
 @Injectable()
 export class UserDashBoardService {
@@ -60,6 +61,35 @@ export class UserDashBoardService {
         }
         delete req['password']
         return req
+    }
+
+    async createOrUpdateUserVerification(userId: number, dto: CreateUpdateVerificationDto) {
+        if (dto.id) {
+            const verification = await this.prismaService.userVerifications.findFirst({
+                where: { id: dto.id, user_id: userId, type: dto.type }
+            });
+
+            if (!verification) {
+                throw new HttpException('Verification not found', HttpStatus.NOT_FOUND);
+            }
+
+            return this.prismaService.userVerifications.update({
+                where: { id: dto.id },
+                data: {
+                    type: dto.type,
+                    card_number: dto.card_number,
+                    user_id: userId
+                }
+            });
+        } else {
+            return this.prismaService.userVerifications.create({
+                data: {
+                    type: dto.type,
+                    card_number: dto.card_number,
+                    user_id: userId
+                }
+            });
+        }
     }
 
 }

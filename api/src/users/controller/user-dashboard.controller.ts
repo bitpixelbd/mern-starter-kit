@@ -8,6 +8,7 @@ import { UpdatePasswordDto } from "../dto/updatePasswordDto";
 import { UserDashBoardService } from "../services/user-dashboard.service";
 import { UserDashboardNotificationService } from "../services/user-dashboard-notification.service";
 import { MarkNotificationsReadDto } from "../dto/mark-notification-read.dto";
+import { CreateUpdateVerificationDto } from "../dto/add-update-verification-data.dto";
 
 @UseGuards(JwtAuthGuard)
 @Controller('user-profile')
@@ -49,5 +50,12 @@ export class UserDashBoardController {
       const { id: userId } = req.user;
       const result = await this.notificationService.markNotificationsAsRead(userId, markNotificationsReadDto);
       return res.success(result, 'Notifications marked as read successfully');
+    }
+
+    @Post('verification-info-crud')
+    async createOrUpdateUserVerification(@Req() req, @Body() dto: CreateUpdateVerificationDto) {
+        const { id: userId } = req.user;
+        const verification = await this.userDashboardService.createOrUpdateUserVerification(userId, dto);
+        return res.success(verification, 'User verification created or updated successfully');
     }
 }
