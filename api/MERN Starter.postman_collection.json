@@ -466,6 +466,35 @@
 							]
 						},
 						{
+							"name": "Phone Number Update",
+							"item": [
+								{
+									"name": "sent-otp",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								},
+								{
+									"name": "verify-otp-for-number-update",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "profile-update",
 							"request": {
 								"method": "PATCH",
@@ -491,6 +520,50 @@
 										"update"
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-notifications",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HOST}}/api/v1/user-profile/notifications",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user-profile",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mark-notification-read",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "add-update-verification-info (add)",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "add-update-verification-info (update)",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
