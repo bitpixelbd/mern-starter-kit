@@ -5,6 +5,7 @@ import EmailService from '../../email/email.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { UpdatePasswordDto } from '../dto/updatePasswordDto';
 import { CreateUpdateVerificationDto } from '../dto/add-update-verification-data.dto';
+import { VerifyOtpForPhoneNumberUpdateDto } from '../dto/verify-otp-for-phone-number-update.dto';
 
 @Injectable()
 export class UserDashBoardService {
@@ -92,4 +93,58 @@ export class UserDashBoardService {
         }
     }
 
+    async verifyOtpForPhoneNumberUpdate(payload:VerifyOtpForPhoneNumberUpdateDto){
+        try{
+            const isVerified = await this.prismaService.otpVerification.findFirst({
+              where: {
+                ...payload
+              }
+            })
+            if (!isVerified) {
+              throw new HttpException("Please insert correct Otp", HttpStatus.NOT_ACCEPTABLE)
+            }
+            
+            const instanceOfVerification = await this.prismaService.testUser.create({
+              data: {
+                phone: payload.phone,
+                email: payload.email,
+                name: "phone-update"
+              }
+            })
+            return {instanceOfVerification}
+          }catch(err){
+            throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+          }
+    }
+
+    async updatePhoneNumber (userId:number, newPhoneNumber:string) {
+        try{
+            const isVerified = await this.prismaService.testUser.findFirst({
+                where: {
+                    name: "phone-update",
+                    phone: newPhoneNumber
+                }
+            })
+            if (!isVerified) {
+                throw new HttpException("Please Verify new phone number", HttpStatus.NOT_FOUND)
+            }
+    
+            const updateNumber =  await this.prismaService.user.update({
+                where: {
+                    id: +userId
+                },
+                data: {
+                    phone: newPhoneNumber
+                }
+            })
+            const  isDelete = await this.prismaService.testUser.delete({
+                where: {
+                    id: isVerified.id
+                }
+            })
+            return updateNumber
+        }catch(err){
+            throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
 }

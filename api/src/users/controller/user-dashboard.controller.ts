@@ -9,6 +9,7 @@ import { UserDashBoardService } from "../services/user-dashboard.service";
 import { UserDashboardNotificationService } from "../services/user-dashboard-notification.service";
 import { MarkNotificationsReadDto } from "../dto/mark-notification-read.dto";
 import { CreateUpdateVerificationDto } from "../dto/add-update-verification-data.dto";
+import { VerifyOtpForPhoneNumberUpdateDto } from "../dto/verify-otp-for-phone-number-update.dto";
 
 @UseGuards(JwtAuthGuard)
 @Controller('user-profile')
@@ -57,5 +58,18 @@ export class UserDashBoardController {
         const { id: userId } = req.user;
         const verification = await this.userDashboardService.createOrUpdateUserVerification(userId, dto);
         return res.success(verification, 'User verification created or updated successfully');
+    }
+
+    @Post("update/phone/verify/otp")
+    async verifyOtpForUpdatePhone (@Body() payload: VerifyOtpForPhoneNumberUpdateDto) {
+        const instanceOfVerification = await this.userDashboardService.verifyOtpForPhoneNumberUpdate(payload)
+        return res.success({mesasge: "successfully verified", instanceOfVerification})
+    }
+
+    @Post("update/phone-number")
+    async updatePhoneNumber(@Req() req, @Body() payload: {newNumber:string}) {
+        const { id: userId } = req.user;
+        const updatePhoneNumber = await this.userDashboardService.updatePhoneNumber(userId, payload.newNumber)
+        return res.success(updatePhoneNumber, "Update Successfully")
     }
 }
